@@ -1,0 +1,18 @@
+.gameboard-container {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  width: 100%;
+  background-color: gray;
+  display: flex;
+}
+
+.square {
+  box-sizing: border-box;
+  flex-grow: 1;
+  border: 1px solid black;
+  height: 25px;
+}
