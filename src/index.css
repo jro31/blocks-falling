@@ -6,13 +6,25 @@
 
 .row {
   width: 100%;
-  background-color: gray;
+  /* background-color: gray; */
   display: flex;
 }
 
 .square {
   box-sizing: border-box;
   flex-grow: 1;
-  border: 1px solid black;
+  border: 1px solid white;
   height: 25px;
+}
+
+.empty {
+  background-color: black;
+}
+
+.live {
+  background-color: red;
+}
+
+.filled {
+  background-color: green;
 }
