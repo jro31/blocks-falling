@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const initialSquares = () => {
   // prettier-ignore
@@ -7,26 +7,32 @@ const initialSquares = () => {
 
 export const blocks = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
 
+const blockObject = (status, color) => {
+  return {
+    status: status,
+    color: color,
+  };
+};
+
 const newBlockO = () => {
-  const blockObject = { status: 'live', color: 'green' };
+  const blockO = blockObject('live', 'green');
 
   return {
     1: {
-      5: blockObject,
-      6: blockObject,
+      5: blockO,
+      6: blockO,
     },
     2: {
-      5: blockObject,
-      6: blockObject,
+      5: blockO,
+      6: blockO,
     },
   };
 };
 
 const mergeNestedObjects = (existingObject, newObject) => {
   let returnObject = { ...existingObject };
-  let outerKeys = Object.keys(newObject);
 
-  outerKeys.forEach(outerKey =>
+  Object.keys(newObject).forEach(outerKey =>
     Object.keys(newObject[outerKey]).forEach(
       innerKey =>
         (returnObject = {
@@ -52,7 +58,10 @@ const gameBoardSlice = createSlice({
       state.liveBlock = action.payload;
       if ((state.blockCounter + 1) % 10 === 0) state.speed = state.speed * 0.75;
       state.blockCounter = state.blockCounter + 1;
-      state.squares = mergeNestedObjects(state.squares, newBlockO());
+      state.squares = mergeNestedObjects(current(state.squares), newBlockO());
+    },
+    updateGameBoard(state, action) {
+      state.squares = action.payload;
     },
   },
 });
