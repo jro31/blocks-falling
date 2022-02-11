@@ -23,12 +23,22 @@ const GameBoard = () => {
   };
 
   const moveBlockDown = () => {
-    moveBlock('down', squares);
+    moveBlock('down');
+  };
+
+  const moveBlockLeft = () => {
+    moveBlock('left');
+  };
+
+  const moveBlockRight = () => {
+    moveBlock('right');
   };
 
   useEffect(() => {
     newBlock();
   }, []);
+
+  console.log(squares);
 
   return (
     <Fragment>
@@ -48,6 +58,8 @@ const GameBoard = () => {
         ))}
       </div>
       <div onClick={moveBlockDown}>MOVE DOWN</div>
+      <div onClick={moveBlockLeft}>MOVE LEFT</div>
+      <div onClick={moveBlockRight}>MOVE RIGHT</div>
     </Fragment>
   );
 };
