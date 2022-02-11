@@ -9,6 +9,8 @@ const useMoveBlock = () => {
   const canMove = useCanMoveBlock();
 
   const down = () => {
+    if (!canMove('down')) return;
+
     let newObject = JSON.parse(JSON.stringify(squares));
 
     Object.keys(squares)

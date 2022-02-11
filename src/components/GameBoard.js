@@ -38,8 +38,6 @@ const GameBoard = () => {
     newBlock();
   }, []);
 
-  console.log(squares);
-
   return (
     <Fragment>
       <div className='gameboard-container'>

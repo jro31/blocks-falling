@@ -1,7 +1,14 @@
+import useIsTouchingBottom from './use-is-touching-bottom';
 import useIsTouchingWall from './use-is-touching-wall';
 
 const useCanMoveBlock = () => {
+  const isTouchingBottom = useIsTouchingBottom();
   const isTouchingWall = useIsTouchingWall();
+
+  const down = () => {
+    // TODO - Update this to also consider if there are blocks to the beneath
+    return !isTouchingBottom();
+  };
 
   const left = () => {
     // TODO - Update this to also consider if there are blocks to the left
@@ -15,6 +22,8 @@ const useCanMoveBlock = () => {
 
   const canMove = direction => {
     switch (direction) {
+      case 'down':
+        return down();
       case 'left':
         return left();
       case 'right':
