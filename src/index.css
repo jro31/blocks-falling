@@ -26,6 +26,30 @@
 .settled {
 }
 
+.blue {
+  background-color: blue;
+}
+
+.chocolate {
+  background-color: chocolate;
+}
+
+.fuchsia {
+  background-color: fuchsia;
+}
+
+.gold {
+  background-color: gold;
+}
+
 .green {
   background-color: green;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.red {
+  background-color: red;
 }
