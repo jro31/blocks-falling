@@ -7,8 +7,6 @@ const useCanMoveBlock = () => {
 
   const down = () => {
     // TODO - Update this to also consider if there are blocks to the beneath
-    console.log(isTouchingBottom());
-
     return !isTouchingBottom();
   };
 

@@ -12,8 +12,8 @@ const GameBoard = () => {
   const dispatch = useDispatch();
   const squares = useSelector(state => state.gameBoard.squares);
   const speed = useSelector(state => state.gameBoard.speed);
-  const downTimeRemaining = useSelector(state => state.gameBoard.downTimeRemaining);
-  const timerIsLive = useSelector(state => state.gameBoard.timerIsLive);
+  // const downTimeRemaining = useSelector(state => state.gameBoard.downTimeRemaining);
+  const timer = useSelector(state => state.gameBoard.timer);
   squaresRef = useRef(squares);
   squaresRef.current = squares;
 
@@ -31,8 +31,8 @@ const GameBoard = () => {
     moveBlockDown();
   };
 
-  const moveBlockDown = (currentGrid = null) => {
-    moveBlock('down', currentGrid);
+  const moveBlockDown = () => {
+    moveBlock('down');
   };
 
   const moveBlockLeft = () => {
@@ -58,17 +58,24 @@ const GameBoard = () => {
   }, []);
 
   useEffect(() => {
+    console.log('🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠');
     clearTimeout(timeOut);
 
-    if (timerIsLive) {
+    if (timer.isLive) {
       timeOut = setTimeout(() => {
-        moveBlockDown(squaresRef.current);
+        moveBlockDown();
       }, speed);
     }
+
+    // console.log(timeOut);
     // dispatch(
     //   gameBoardActions.setDownTimeRemaining(new Date().getTime() + downTimeRemaining || speed)
     // );
-  }, [timerIsLive]);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [timer]);
 
   return (
     <Fragment>

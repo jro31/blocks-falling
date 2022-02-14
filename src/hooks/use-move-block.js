@@ -10,10 +10,9 @@ const useMoveBlock = () => {
   const squares = useSelector(state => state.gameBoard.squares);
   const canMove = useCanMoveBlock();
 
-  const down = currentGrid => {
+  const down = () => {
     dispatch(gameBoardActions.stopTimer());
 
-    // let existingObject = JSON.parse(JSON.stringify(currentGrid || squares));
     let existingObject = JSON.parse(JSON.stringify(squaresRef.current));
     let newObject = JSON.parse(JSON.stringify(existingObject));
 
@@ -95,10 +94,10 @@ const useMoveBlock = () => {
     dispatch(gameBoardActions.updateGameBoard(newObject));
   };
 
-  const moveBlock = (direction, currentGrid = null) => {
+  const moveBlock = direction => {
     switch (direction) {
       case 'down':
-        down(currentGrid);
+        down();
         break;
       case 'left':
         left();

@@ -161,8 +161,8 @@ const gameBoardSlice = createSlice({
     speed: 1000,
     liveBlock: blocks[Math.floor(Math.random() * blocks.length)],
     blockCounter: 0,
-    timerIsLive: false,
-    downTimeRemaining: null,
+    timer: { isLive: true },
+    // downTimeRemaining: null,
   },
   reducers: {
     nextBlock(state) {
@@ -178,15 +178,15 @@ const gameBoardSlice = createSlice({
       state.squares = action.payload;
     },
     startTimer(state) {
-      state.timerIsLive = true;
-      state.downTimeRemaining = null;
+      state.timer = { isLive: true };
+      // state.downTimeRemaining = null;
     },
     stopTimer(state) {
-      state.timerIsLive = false;
+      state.timer = { isLive: false };
     },
-    setDownTimeRemaining(state, action) {
-      state.downTimeRemaining = action.payload;
-    },
+    // setDownTimeRemaining(state, action) {
+    //   state.downTimeRemaining = action.payload;
+    // },
   },
 });
 
