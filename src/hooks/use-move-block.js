@@ -3,26 +3,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import useCanMoveBlock from './use-can-move-block';
 import { gameBoardActions } from '../store/game-board';
 
+import { squaresRef } from '../components/GameBoard';
+
 const useMoveBlock = () => {
   const dispatch = useDispatch();
   const squares = useSelector(state => state.gameBoard.squares);
   const canMove = useCanMoveBlock();
 
-  const down = () => {
+  const down = currentGrid => {
     dispatch(gameBoardActions.stopTimer());
 
-    let newObject = JSON.parse(JSON.stringify(squares));
+    // let existingObject = JSON.parse(JSON.stringify(currentGrid || squares));
+    let existingObject = JSON.parse(JSON.stringify(squaresRef.current));
+    let newObject = JSON.parse(JSON.stringify(existingObject));
 
     if (canMove('down')) {
-      Object.keys(squares)
+      Object.keys(existingObject)
         .reverse()
         .forEach(outerKey =>
-          Object.keys(squares[outerKey]).forEach(innerKey => {
-            if (squares[outerKey][innerKey].status === 'live') {
+          Object.keys(existingObject[outerKey]).forEach(innerKey => {
+            if (existingObject[outerKey][innerKey].status === 'live') {
               newObject[outerKey][innerKey] = { status: 'empty', color: '' };
               newObject[parseInt(outerKey) + 1][innerKey] = {
                 status: 'live',
-                color: squares[outerKey][innerKey].color,
+                color: existingObject[outerKey][innerKey].color,
               };
             }
           })
@@ -30,14 +34,14 @@ const useMoveBlock = () => {
 
       dispatch(gameBoardActions.updateGameBoard(newObject));
     } else {
-      Object.keys(squares)
+      Object.keys(existingObject)
         .reverse()
         .forEach(outerKey =>
-          Object.keys(squares[outerKey]).forEach(innerKey => {
-            if (squares[outerKey][innerKey].status === 'live') {
+          Object.keys(existingObject[outerKey]).forEach(innerKey => {
+            if (existingObject[outerKey][innerKey].status === 'live') {
               newObject[outerKey][innerKey] = {
                 status: 'settled',
-                color: squares[outerKey][innerKey].color,
+                color: existingObject[outerKey][innerKey].color,
               };
             }
           })
@@ -58,7 +62,10 @@ const useMoveBlock = () => {
       Object.keys(squares[outerKey]).forEach(innerKey => {
         if (squares[outerKey][innerKey].status === 'live') {
           newObject[outerKey][innerKey] = { status: 'empty', color: '' };
-          newObject[outerKey][parseInt(innerKey) - 1] = { status: 'live', color: 'green' };
+          newObject[outerKey][parseInt(innerKey) - 1] = {
+            status: 'live',
+            color: squares[outerKey][innerKey].color,
+          };
         }
       })
     );
@@ -77,7 +84,10 @@ const useMoveBlock = () => {
         .forEach(innerKey => {
           if (squares[outerKey][innerKey].status === 'live') {
             newObject[outerKey][innerKey] = { status: 'empty', color: '' };
-            newObject[outerKey][parseInt(innerKey) + 1] = { status: 'live', color: 'green' };
+            newObject[outerKey][parseInt(innerKey) + 1] = {
+              status: 'live',
+              color: squares[outerKey][innerKey].color,
+            };
           }
         })
     );
@@ -85,10 +95,10 @@ const useMoveBlock = () => {
     dispatch(gameBoardActions.updateGameBoard(newObject));
   };
 
-  const moveBlock = direction => {
+  const moveBlock = (direction, currentGrid = null) => {
     switch (direction) {
       case 'down':
-        down();
+        down(currentGrid);
         break;
       case 'left':
         left();

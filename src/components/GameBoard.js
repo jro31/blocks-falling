@@ -1,16 +1,21 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { gameBoardActions } from '../store/game-board';
 import useMoveBlock from '../hooks/use-move-block';
 
+// export let downTimeRemaining;
 let timeOut;
+export let squaresRef;
 
 const GameBoard = () => {
   const dispatch = useDispatch();
   const squares = useSelector(state => state.gameBoard.squares);
   const speed = useSelector(state => state.gameBoard.speed);
+  const downTimeRemaining = useSelector(state => state.gameBoard.downTimeRemaining);
   const timerIsLive = useSelector(state => state.gameBoard.timerIsLive);
+  squaresRef = useRef(squares);
+  squaresRef.current = squares;
 
   const moveBlock = useMoveBlock();
 
@@ -22,8 +27,12 @@ const GameBoard = () => {
     dispatch(gameBoardActions.nextBlock());
   };
 
-  const moveBlockDown = () => {
-    moveBlock('down');
+  const moveBlockDownClickHandler = () => {
+    moveBlockDown();
+  };
+
+  const moveBlockDown = (currentGrid = null) => {
+    moveBlock('down', currentGrid);
   };
 
   const moveBlockLeft = () => {
@@ -53,9 +62,12 @@ const GameBoard = () => {
 
     if (timerIsLive) {
       timeOut = setTimeout(() => {
-        moveBlockDown();
+        moveBlockDown(squaresRef.current);
       }, speed);
     }
+    // dispatch(
+    //   gameBoardActions.setDownTimeRemaining(new Date().getTime() + downTimeRemaining || speed)
+    // );
   }, [timerIsLive]);
 
   return (
@@ -75,7 +87,7 @@ const GameBoard = () => {
           </div>
         ))}
       </div>
-      <div onClick={moveBlockDown}>MOVE DOWN</div>
+      <div onClick={moveBlockDownClickHandler}>MOVE DOWN</div>
       <div onClick={moveBlockLeft}>MOVE LEFT</div>
       <div onClick={moveBlockRight}>MOVE RIGHT</div>
       <div onClick={stopDescent}>STOP DESCENT</div>
