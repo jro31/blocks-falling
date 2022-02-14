@@ -162,7 +162,6 @@ const gameBoardSlice = createSlice({
     liveBlock: blocks[Math.floor(Math.random() * blocks.length)],
     blockCounter: 0,
     timer: { isLive: true },
-    // downTimeRemaining: null,
   },
   reducers: {
     nextBlock(state) {
@@ -179,14 +178,10 @@ const gameBoardSlice = createSlice({
     },
     startTimer(state) {
       state.timer = { isLive: true };
-      // state.downTimeRemaining = null;
     },
     stopTimer(state) {
       state.timer = { isLive: false };
     },
-    // setDownTimeRemaining(state, action) {
-    //   state.downTimeRemaining = action.payload;
-    // },
   },
 });
 

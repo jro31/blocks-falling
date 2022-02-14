@@ -55,7 +55,8 @@ const useMoveBlock = () => {
   const left = () => {
     if (!canMove('left')) return;
 
-    let newObject = JSON.parse(JSON.stringify(squares));
+    let existingObject = JSON.parse(JSON.stringify(squaresRef.current));
+    let newObject = JSON.parse(JSON.stringify(existingObject));
 
     Object.keys(squares).forEach(outerKey =>
       Object.keys(squares[outerKey]).forEach(innerKey => {
@@ -75,7 +76,8 @@ const useMoveBlock = () => {
   const right = () => {
     if (!canMove('right')) return;
 
-    let newObject = JSON.parse(JSON.stringify(squares));
+    let existingObject = JSON.parse(JSON.stringify(squaresRef.current));
+    let newObject = JSON.parse(JSON.stringify(existingObject));
 
     Object.keys(squares).forEach(outerKey =>
       Object.keys(squares[outerKey])

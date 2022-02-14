@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gameBoardActions } from '../store/game-board';
 import useMoveBlock from '../hooks/use-move-block';
 
-// export let downTimeRemaining;
 let timeOut;
 export let squaresRef;
 
@@ -12,7 +11,6 @@ const GameBoard = () => {
   const dispatch = useDispatch();
   const squares = useSelector(state => state.gameBoard.squares);
   const speed = useSelector(state => state.gameBoard.speed);
-  // const downTimeRemaining = useSelector(state => state.gameBoard.downTimeRemaining);
   const timer = useSelector(state => state.gameBoard.timer);
   squaresRef = useRef(squares);
   squaresRef.current = squares;
@@ -58,19 +56,11 @@ const GameBoard = () => {
   }, []);
 
   useEffect(() => {
-    console.log('🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠');
-    clearTimeout(timeOut);
-
     if (timer.isLive) {
       timeOut = setTimeout(() => {
         moveBlockDown();
       }, speed);
     }
-
-    // console.log(timeOut);
-    // dispatch(
-    //   gameBoardActions.setDownTimeRemaining(new Date().getTime() + downTimeRemaining || speed)
-    // );
 
     return () => {
       clearTimeout(timeOut);
