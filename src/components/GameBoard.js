@@ -1,10 +1,10 @@
 import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { blocks, gameBoardActions } from '../store/game-board';
+import { gameBoardActions } from '../store/game-board';
 import useMoveBlock from '../hooks/use-move-block';
 
-let interval;
+let timeOut;
 
 const GameBoard = () => {
   const dispatch = useDispatch();
@@ -18,9 +18,8 @@ const GameBoard = () => {
     newBlock();
   };
 
-  const newBlock = async () => {
-    clearInterval(interval);
-    dispatch(gameBoardActions.nextBlock(blocks[Math.floor(Math.random() * blocks.length)]));
+  const newBlock = () => {
+    dispatch(gameBoardActions.nextBlock());
   };
 
   const moveBlockDown = () => {
@@ -35,13 +34,25 @@ const GameBoard = () => {
     moveBlock('right');
   };
 
+  // Test function - Can be deleted
+  const stopDescent = () => {
+    dispatch(gameBoardActions.stopTimer());
+  };
+
+  // Test function - Can be deleted
+  const startDescent = () => {
+    dispatch(gameBoardActions.startTimer());
+  };
+
   useEffect(() => {
     startGame();
   }, []);
 
   useEffect(() => {
+    clearTimeout(timeOut);
+
     if (timerIsLive) {
-      setTimeout(() => {
+      timeOut = setTimeout(() => {
         moveBlockDown();
       }, speed);
     }
@@ -58,7 +69,7 @@ const GameBoard = () => {
             ).map(column => (
               <div
                 key={`square-${row}-${column}`}
-                className={`square ${squares[row][column].status}`}
+                className={`square ${squares[row][column].status} ${squares[row][column].color}`}
               />
             ))}
           </div>
@@ -67,6 +78,8 @@ const GameBoard = () => {
       <div onClick={moveBlockDown}>MOVE DOWN</div>
       <div onClick={moveBlockLeft}>MOVE LEFT</div>
       <div onClick={moveBlockRight}>MOVE RIGHT</div>
+      <div onClick={stopDescent}>STOP DESCENT</div>
+      <div onClick={startDescent}>START DESCENT</div>
     </Fragment>
   );
 };

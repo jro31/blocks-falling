@@ -9,24 +9,43 @@ const useMoveBlock = () => {
   const canMove = useCanMoveBlock();
 
   const down = () => {
-    if (!canMove('down')) return;
-
     dispatch(gameBoardActions.stopTimer());
 
     let newObject = JSON.parse(JSON.stringify(squares));
 
-    Object.keys(squares)
-      .reverse()
-      .forEach(outerKey =>
-        Object.keys(squares[outerKey]).forEach(innerKey => {
-          if (squares[outerKey][innerKey].status === 'live') {
-            newObject[outerKey][innerKey] = { status: 'empty', color: '' };
-            newObject[parseInt(outerKey) + 1][innerKey] = { status: 'live', color: 'green' };
-          }
-        })
-      );
+    if (canMove('down')) {
+      Object.keys(squares)
+        .reverse()
+        .forEach(outerKey =>
+          Object.keys(squares[outerKey]).forEach(innerKey => {
+            if (squares[outerKey][innerKey].status === 'live') {
+              newObject[outerKey][innerKey] = { status: 'empty', color: '' };
+              newObject[parseInt(outerKey) + 1][innerKey] = {
+                status: 'live',
+                color: squares[outerKey][innerKey].color,
+              };
+            }
+          })
+        );
 
-    dispatch(gameBoardActions.updateGameBoard(newObject));
+      dispatch(gameBoardActions.updateGameBoard(newObject));
+    } else {
+      Object.keys(squares)
+        .reverse()
+        .forEach(outerKey =>
+          Object.keys(squares[outerKey]).forEach(innerKey => {
+            if (squares[outerKey][innerKey].status === 'live') {
+              newObject[outerKey][innerKey] = {
+                status: 'settled',
+                color: squares[outerKey][innerKey].color,
+              };
+            }
+          })
+        );
+
+      dispatch(gameBoardActions.updateGameBoard(newObject));
+      dispatch(gameBoardActions.nextBlock());
+    }
     dispatch(gameBoardActions.startTimer());
   };
 
