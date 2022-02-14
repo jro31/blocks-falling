@@ -10,16 +10,17 @@ const GameBoard = () => {
   const dispatch = useDispatch();
   const squares = useSelector(state => state.gameBoard.squares);
   const speed = useSelector(state => state.gameBoard.speed);
+  const timerIsLive = useSelector(state => state.gameBoard.timerIsLive);
 
   const moveBlock = useMoveBlock();
 
-  const newBlock = () => {
+  const startGame = () => {
+    newBlock();
+  };
+
+  const newBlock = async () => {
     clearInterval(interval);
     dispatch(gameBoardActions.nextBlock(blocks[Math.floor(Math.random() * blocks.length)]));
-
-    // interval = setInterval(() => {
-    //   console.log('HERE I AM');
-    // }, speed);
   };
 
   const moveBlockDown = () => {
@@ -35,8 +36,16 @@ const GameBoard = () => {
   };
 
   useEffect(() => {
-    newBlock();
+    startGame();
   }, []);
+
+  useEffect(() => {
+    if (timerIsLive) {
+      setTimeout(() => {
+        moveBlockDown();
+      }, speed);
+    }
+  }, [timerIsLive]);
 
   return (
     <Fragment>

@@ -11,6 +11,8 @@ const useMoveBlock = () => {
   const down = () => {
     if (!canMove('down')) return;
 
+    dispatch(gameBoardActions.stopTimer());
+
     let newObject = JSON.parse(JSON.stringify(squares));
 
     Object.keys(squares)
@@ -25,6 +27,7 @@ const useMoveBlock = () => {
       );
 
     dispatch(gameBoardActions.updateGameBoard(newObject));
+    dispatch(gameBoardActions.startTimer());
   };
 
   const left = () => {

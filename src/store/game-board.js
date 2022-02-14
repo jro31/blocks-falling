@@ -52,6 +52,7 @@ const gameBoardSlice = createSlice({
     speed: 1000,
     liveBlock: blocks[Math.floor(Math.random() * blocks.length)],
     blockCounter: 0,
+    timerIsLive: false,
   },
   reducers: {
     nextBlock(state, action) {
@@ -59,9 +60,16 @@ const gameBoardSlice = createSlice({
       if ((state.blockCounter + 1) % 10 === 0) state.speed = state.speed * 0.75;
       state.blockCounter = state.blockCounter + 1;
       state.squares = mergeNestedObjects(current(state.squares), newBlockO());
+      state.timerIsLive = true;
     },
     updateGameBoard(state, action) {
       state.squares = action.payload;
+    },
+    startTimer(state) {
+      state.timerIsLive = true;
+    },
+    stopTimer(state) {
+      state.timerIsLive = false;
     },
   },
 });
