@@ -51,6 +51,33 @@ const GameBoard = () => {
     dispatch(gameBoardActions.startTimer());
   };
 
+  const handleKeyPress = event => {
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        moveBlockDown();
+        break;
+      case 'ArrowLeft':
+        event.preventDefault();
+        moveBlockLeft();
+        break;
+      case 'ArrowRight':
+        event.preventDefault();
+        moveBlockRight();
+        break;
+      default:
+        return;
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+
   useEffect(() => {
     startGame();
   }, []);

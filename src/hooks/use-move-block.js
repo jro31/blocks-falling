@@ -58,13 +58,13 @@ const useMoveBlock = () => {
     let existingObject = JSON.parse(JSON.stringify(squaresRef.current));
     let newObject = JSON.parse(JSON.stringify(existingObject));
 
-    Object.keys(squares).forEach(outerKey =>
-      Object.keys(squares[outerKey]).forEach(innerKey => {
-        if (squares[outerKey][innerKey].status === 'live') {
+    Object.keys(existingObject).forEach(outerKey =>
+      Object.keys(existingObject[outerKey]).forEach(innerKey => {
+        if (existingObject[outerKey][innerKey].status === 'live') {
           newObject[outerKey][innerKey] = { status: 'empty', color: '' };
           newObject[outerKey][parseInt(innerKey) - 1] = {
             status: 'live',
-            color: squares[outerKey][innerKey].color,
+            color: existingObject[outerKey][innerKey].color,
           };
         }
       })
@@ -79,15 +79,15 @@ const useMoveBlock = () => {
     let existingObject = JSON.parse(JSON.stringify(squaresRef.current));
     let newObject = JSON.parse(JSON.stringify(existingObject));
 
-    Object.keys(squares).forEach(outerKey =>
-      Object.keys(squares[outerKey])
+    Object.keys(existingObject).forEach(outerKey =>
+      Object.keys(existingObject[outerKey])
         .reverse()
         .forEach(innerKey => {
-          if (squares[outerKey][innerKey].status === 'live') {
+          if (existingObject[outerKey][innerKey].status === 'live') {
             newObject[outerKey][innerKey] = { status: 'empty', color: '' };
             newObject[outerKey][parseInt(innerKey) + 1] = {
               status: 'live',
-              color: squares[outerKey][innerKey].color,
+              color: existingObject[outerKey][innerKey].color,
             };
           }
         })
