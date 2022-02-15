@@ -1,24 +1,37 @@
 import { Fragment, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { gameBoardActions } from '../store/game-board';
+import { gameBoardActions, gameOver, inProgress, paused, preGame } from '../store/game-board';
 import useMoveBlock from '../hooks/use-move-block';
 
 let timeOut;
 export let squaresRef;
+export let statusRef;
 
 const GameBoard = () => {
   const dispatch = useDispatch();
   const squares = useSelector(state => state.gameBoard.squares);
   const speed = useSelector(state => state.gameBoard.speed);
   const timer = useSelector(state => state.gameBoard.timer);
+  const status = useSelector(state => state.gameBoard.status);
   squaresRef = useRef(squares);
   squaresRef.current = squares;
+  statusRef = useRef(status);
+  statusRef.current = status;
 
   const moveBlock = useMoveBlock();
 
   const startGame = () => {
+    dispatch(gameBoardActions.startGame());
     newBlock();
+  };
+
+  const pauseGame = () => {
+    dispatch(gameBoardActions.pauseGame());
+  };
+
+  const resumeGame = () => {
+    dispatch(gameBoardActions.resumeGame());
   };
 
   const newBlock = () => {
@@ -61,6 +74,16 @@ const GameBoard = () => {
         event.preventDefault();
         moveBlockRight();
         break;
+      case ' ':
+        event.preventDefault();
+        if (statusRef.current === preGame || statusRef.current === gameOver) {
+          startGame();
+        } else if (statusRef.current === inProgress) {
+          pauseGame();
+        } else if (statusRef.current === paused) {
+          resumeGame();
+        }
+        break;
       default:
         return;
     }
@@ -75,20 +98,18 @@ const GameBoard = () => {
   }, []);
 
   useEffect(() => {
-    startGame();
-  }, []);
-
-  useEffect(() => {
-    if (timer.isLive) {
-      timeOut = setTimeout(() => {
-        moveBlockDown();
-      }, speed);
+    if (status === inProgress) {
+      if (timer.isLive) {
+        timeOut = setTimeout(() => {
+          moveBlockDown();
+        }, speed);
+      }
     }
 
     return () => {
       clearTimeout(timeOut);
     };
-  }, [timer]);
+  }, [status, timer]);
 
   return (
     <Fragment>

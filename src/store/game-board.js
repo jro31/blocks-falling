@@ -1,5 +1,10 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 
+export const preGame = 'pre-game';
+export const inProgress = 'in-progress';
+export const paused = 'paused';
+export const gameOver = 'game-over';
+
 const initialSquares = () => {
   // prettier-ignore
   return Array.from(new Array(20), (_, i) => i + 1).reduce((acc,curr)=> (acc[curr]= Array.from(new Array(10), (_, i) => i + 1).reduce((acc,curr)=> (acc[curr]={status: 'empty', color: ''}, acc), {}), acc),{})
@@ -138,6 +143,11 @@ const newBlockZ = () => {
   };
 };
 
+const canAddBlock = (nextBlock, currentGrid) => {
+  // TODO
+  return true;
+};
+
 const mergeNestedObjects = (existingObject, newObject) => {
   let returnObject = { ...existingObject };
 
@@ -162,6 +172,7 @@ const gameBoardSlice = createSlice({
     liveBlock: blocks[Math.floor(Math.random() * blocks.length)],
     blockCounter: 0,
     timer: { isLive: true },
+    status: preGame,
   },
   reducers: {
     nextBlock(state) {
@@ -170,8 +181,11 @@ const gameBoardSlice = createSlice({
       state.liveBlock = newBlock;
       if ((state.blockCounter + 1) % 10 === 0) state.speed = state.speed * 0.75;
       state.blockCounter = state.blockCounter + 1;
-      state.squares = mergeNestedObjects(current(state.squares), newBlockShape(newBlock));
-      state.timerIsLive = true;
+      if (canAddBlock(newBlock, current(state.squares))) {
+        state.squares = mergeNestedObjects(current(state.squares), newBlockShape(newBlock));
+      } else {
+      }
+      state.timer = { isLive: true };
     },
     updateGameBoard(state, action) {
       state.squares = action.payload;
@@ -181,6 +195,18 @@ const gameBoardSlice = createSlice({
     },
     stopTimer(state) {
       state.timer = { isLive: false };
+    },
+    startGame(state) {
+      state.status = inProgress;
+    },
+    pauseGame(state) {
+      state.status = paused;
+    },
+    resumeGame(state) {
+      state.status = inProgress;
+    },
+    finishGame(state) {
+      state.status = gameOver;
     },
   },
 });
