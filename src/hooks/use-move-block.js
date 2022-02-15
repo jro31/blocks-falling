@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
 import useCanMoveBlock from './use-can-move-block';
-import { gameBoardActions, inProgress } from '../store/game-board';
+import { dead, empty, gameBoardActions, inProgress, live, settled } from '../store/game-board';
 
 import { squaresRef } from '../components/GameBoard';
 import { statusRef } from '../components/GameBoard';
@@ -22,9 +22,9 @@ const useMoveBlock = () => {
           .reverse()
           .forEach(outerKey =>
             Object.keys(existingObject[outerKey]).forEach(innerKey => {
-              if (existingObject[outerKey][innerKey].status === 'live') {
+              if (existingObject[outerKey][innerKey].status === live) {
                 newObject[outerKey][innerKey] = {
-                  status: outerKey === '0' ? 'dead' : 'empty',
+                  status: outerKey === '0' ? dead : empty,
                   color: '',
                 };
 
@@ -42,9 +42,9 @@ const useMoveBlock = () => {
           .reverse()
           .forEach(outerKey =>
             Object.keys(existingObject[outerKey]).forEach(innerKey => {
-              if (existingObject[outerKey][innerKey].status === 'live') {
+              if (existingObject[outerKey][innerKey].status === live) {
                 newObject[outerKey][innerKey] = {
-                  status: 'settled',
+                  status: settled,
                   color: existingObject[outerKey][innerKey].color,
                 };
               }
@@ -66,9 +66,9 @@ const useMoveBlock = () => {
 
     Object.keys(existingObject).forEach(outerKey =>
       Object.keys(existingObject[outerKey]).forEach(innerKey => {
-        if (existingObject[outerKey][innerKey].status === 'live') {
+        if (existingObject[outerKey][innerKey].status === live) {
           newObject[outerKey][innerKey] = {
-            status: outerKey === '0' ? 'dead' : 'empty',
+            status: outerKey === '0' ? dead : empty,
             color: '',
           };
           newObject[outerKey][parseInt(innerKey) - 1] = {
@@ -92,9 +92,9 @@ const useMoveBlock = () => {
       Object.keys(existingObject[outerKey])
         .reverse()
         .forEach(innerKey => {
-          if (existingObject[outerKey][innerKey].status === 'live') {
+          if (existingObject[outerKey][innerKey].status === live) {
             newObject[outerKey][innerKey] = {
-              status: outerKey === '0' ? 'dead' : 'empty',
+              status: outerKey === '0' ? dead : empty,
               color: '',
             };
             newObject[outerKey][parseInt(innerKey) + 1] = {

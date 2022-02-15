@@ -1,4 +1,5 @@
 import { squaresRef } from '../components/GameBoard';
+import { live } from '../store/game-board';
 
 const useIsTouchingWall = () => {
   const isTouchingWall = direction => {
@@ -11,7 +12,7 @@ const useIsTouchingWall = () => {
       statusArray.push(squaresRef.current[outerKey][direction === 'left' ? 1 : 10].status);
     });
 
-    return statusArray.includes('live');
+    return statusArray.includes(live);
   };
 
   return isTouchingWall;

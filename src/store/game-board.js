@@ -5,18 +5,23 @@ export const inProgress = 'in-progress';
 export const paused = 'paused';
 export const gameOver = 'game-over';
 
+export const live = 'live';
+export const dead = 'dead';
+export const settled = 'settled';
+export const empty = 'empty';
+
 // prettier-ignore
 const initialSquares = () => {
-  const returnObject = Array.from(new Array(20), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = { status: 'empty', color: '' }, acc), {}), acc),{})
-  returnObject[0] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => ((acc[curr] = { status: 'dead', color: '' }), acc), {});
+  const returnObject = Array.from(new Array(20), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = { status: empty, color: '' }, acc), {}), acc),{})
+  returnObject[0] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => ((acc[curr] = { status: dead, color: '' }), acc), {});
   return returnObject;
 };
 
 export const blocks = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
 
-const blockObject = (status, color) => {
+const blockObject = color => {
   return {
-    status: status,
+    status: live,
     color: color,
   };
 };
@@ -43,7 +48,7 @@ const newBlockShape = block => {
 };
 
 const newBlockI = () => {
-  const blockI = blockObject('live', 'red');
+  const blockI = blockObject('red');
 
   return {
     1: {
@@ -56,7 +61,7 @@ const newBlockI = () => {
 };
 
 const newBlockJ = () => {
-  const blockJ = blockObject('live', 'gold');
+  const blockJ = blockObject('gold');
 
   return {
     0: {
@@ -71,7 +76,7 @@ const newBlockJ = () => {
 };
 
 const newBlockL = () => {
-  const blockL = blockObject('live', 'blue');
+  const blockL = blockObject('blue');
 
   return {
     0: {
@@ -86,7 +91,7 @@ const newBlockL = () => {
 };
 
 const newBlockO = () => {
-  const blockO = blockObject('live', 'green');
+  const blockO = blockObject('green');
 
   return {
     0: {
@@ -101,7 +106,7 @@ const newBlockO = () => {
 };
 
 const newBlockS = () => {
-  const blockS = blockObject('live', 'chocolate');
+  const blockS = blockObject('chocolate');
 
   return {
     0: {
@@ -116,7 +121,7 @@ const newBlockS = () => {
 };
 
 const newBlockT = () => {
-  const blockT = blockObject('live', 'orange');
+  const blockT = blockObject('orange');
 
   return {
     0: {
@@ -131,7 +136,7 @@ const newBlockT = () => {
 };
 
 const newBlockZ = () => {
-  const blockZ = blockObject('live', 'fuchsia');
+  const blockZ = blockObject('fuchsia');
 
   return {
     0: {
@@ -186,7 +191,7 @@ const gameBoardSlice = createSlice({
       if (canAddBlock(newBlock, current(state.squares))) {
         state.squares = mergeNestedObjects(current(state.squares), newBlockShape(newBlock));
       } else {
-        // TODO
+        state.status = gameOver;
       }
       state.timer = { isLive: true };
     },
