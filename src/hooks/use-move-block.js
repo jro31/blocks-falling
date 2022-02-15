@@ -23,7 +23,11 @@ const useMoveBlock = () => {
           .forEach(outerKey =>
             Object.keys(existingObject[outerKey]).forEach(innerKey => {
               if (existingObject[outerKey][innerKey].status === 'live') {
-                newObject[outerKey][innerKey] = { status: 'empty', color: '' };
+                newObject[outerKey][innerKey] = {
+                  status: outerKey === '0' ? 'dead' : 'empty',
+                  color: '',
+                };
+
                 newObject[parseInt(outerKey) + 1][innerKey] = {
                   status: 'live',
                   color: existingObject[outerKey][innerKey].color,
@@ -63,7 +67,10 @@ const useMoveBlock = () => {
     Object.keys(existingObject).forEach(outerKey =>
       Object.keys(existingObject[outerKey]).forEach(innerKey => {
         if (existingObject[outerKey][innerKey].status === 'live') {
-          newObject[outerKey][innerKey] = { status: 'empty', color: '' };
+          newObject[outerKey][innerKey] = {
+            status: outerKey === '0' ? 'dead' : 'empty',
+            color: '',
+          };
           newObject[outerKey][parseInt(innerKey) - 1] = {
             status: 'live',
             color: existingObject[outerKey][innerKey].color,
@@ -86,7 +93,10 @@ const useMoveBlock = () => {
         .reverse()
         .forEach(innerKey => {
           if (existingObject[outerKey][innerKey].status === 'live') {
-            newObject[outerKey][innerKey] = { status: 'empty', color: '' };
+            newObject[outerKey][innerKey] = {
+              status: outerKey === '0' ? 'dead' : 'empty',
+              color: '',
+            };
             newObject[outerKey][parseInt(innerKey) + 1] = {
               status: 'live',
               color: existingObject[outerKey][innerKey].color,

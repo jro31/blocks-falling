@@ -8,7 +8,7 @@ export const gameOver = 'game-over';
 // prettier-ignore
 const initialSquares = () => {
   const returnObject = Array.from(new Array(20), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = { status: 'empty', color: '' }, acc), {}), acc),{})
-  returnObject[0] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => ((acc[curr] = { status: 'dead', color: 'transparent' }), acc), {});
+  returnObject[0] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => ((acc[curr] = { status: 'dead', color: '' }), acc), {});
   return returnObject;
 };
 
@@ -59,10 +59,10 @@ const newBlockJ = () => {
   const blockJ = blockObject('live', 'gold');
 
   return {
-    1: {
+    0: {
       4: blockJ,
     },
-    2: {
+    1: {
       4: blockJ,
       5: blockJ,
       6: blockJ,
@@ -74,10 +74,10 @@ const newBlockL = () => {
   const blockL = blockObject('live', 'blue');
 
   return {
-    1: {
+    0: {
       6: blockL,
     },
-    2: {
+    1: {
       4: blockL,
       5: blockL,
       6: blockL,
@@ -89,11 +89,11 @@ const newBlockO = () => {
   const blockO = blockObject('live', 'green');
 
   return {
-    1: {
+    0: {
       5: blockO,
       6: blockO,
     },
-    2: {
+    1: {
       5: blockO,
       6: blockO,
     },
@@ -104,11 +104,11 @@ const newBlockS = () => {
   const blockS = blockObject('live', 'chocolate');
 
   return {
-    1: {
+    0: {
       5: blockS,
       6: blockS,
     },
-    2: {
+    1: {
       4: blockS,
       5: blockS,
     },
@@ -119,10 +119,10 @@ const newBlockT = () => {
   const blockT = blockObject('live', 'orange');
 
   return {
-    1: {
+    0: {
       5: blockT,
     },
-    2: {
+    1: {
       4: blockT,
       5: blockT,
       6: blockT,
@@ -134,11 +134,11 @@ const newBlockZ = () => {
   const blockZ = blockObject('live', 'fuchsia');
 
   return {
-    1: {
+    0: {
       4: blockZ,
       5: blockZ,
     },
-    2: {
+    1: {
       5: blockZ,
       6: blockZ,
     },
