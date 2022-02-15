@@ -1,24 +1,24 @@
 import useIsTouchingBottom from './use-is-touching-bottom';
 import useIsTouchingWall from './use-is-touching-wall';
 import useIsBlockBelow from './use-is-block-below';
+import useIsBlockToSide from './use-is-block-to-side';
 
 const useCanMoveBlock = () => {
   const isTouchingBottom = useIsTouchingBottom();
   const isTouchingWall = useIsTouchingWall();
   const isBlockBelow = useIsBlockBelow();
+  const isBlockToSide = useIsBlockToSide();
 
   const down = () => {
     return !isTouchingBottom() && !isBlockBelow();
   };
 
   const left = () => {
-    // TODO - Update this to also consider if there are blocks to the left
-    return !isTouchingWall('left');
+    return !isTouchingWall('left') && !isBlockToSide('left');
   };
 
   const right = () => {
-    // TODO - Update this to also consider if there are blocks to the right
-    return !isTouchingWall('right');
+    return !isTouchingWall('right') && !isBlockToSide('right');
   };
 
   const canMove = direction => {
