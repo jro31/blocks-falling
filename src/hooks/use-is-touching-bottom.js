@@ -1,12 +1,11 @@
-import { useSelector } from 'react-redux';
+import { squaresRef } from '../components/GameBoard';
 
 const useIsTouchingBottom = () => {
-  const squares = useSelector(state => state.gameBoard.squares);
-
-  const isTouchingBottom = () =>
-    Object.keys(squares[20])
-      .map(square => squares[20][square].status)
+  const isTouchingBottom = () => {
+    return Object.keys(squaresRef.current[20])
+      .map(square => squaresRef.current[20][square].status)
       .includes('live');
+  };
 
   return isTouchingBottom;
 };

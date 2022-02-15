@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import useCanMoveBlock from './use-can-move-block';
 import { gameBoardActions } from '../store/game-board';
@@ -7,7 +7,6 @@ import { squaresRef } from '../components/GameBoard';
 
 const useMoveBlock = () => {
   const dispatch = useDispatch();
-  const squares = useSelector(state => state.gameBoard.squares);
   const canMove = useCanMoveBlock();
 
   const down = () => {

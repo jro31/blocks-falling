@@ -1,15 +1,13 @@
-import { useSelector } from 'react-redux';
+import { squaresRef } from '../components/GameBoard';
 
 const useIsBlockBelow = () => {
-  const squares = useSelector(state => state.gameBoard.squares);
-
   const isBlockBelow = () => {
     let belowSquaresStatusArray = [];
 
-    Object.keys(squares).forEach(outerKey =>
-      Object.keys(squares[outerKey]).forEach(innerKey => {
-        if (squares[outerKey][innerKey].status === 'live') {
-          belowSquaresStatusArray.push(squares[parseInt(outerKey) + 1][innerKey].status);
+    Object.keys(squaresRef.current).forEach(outerKey =>
+      Object.keys(squaresRef.current[outerKey]).forEach(innerKey => {
+        if (squaresRef.current[outerKey][innerKey].status === 'live') {
+          belowSquaresStatusArray.push(squaresRef.current[parseInt(outerKey) + 1][innerKey].status);
         }
       })
     );

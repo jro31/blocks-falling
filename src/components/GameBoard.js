@@ -25,10 +25,6 @@ const GameBoard = () => {
     dispatch(gameBoardActions.nextBlock());
   };
 
-  const moveBlockDownClickHandler = () => {
-    moveBlockDown();
-  };
-
   const moveBlockDown = () => {
     moveBlock('down');
   };
@@ -111,7 +107,7 @@ const GameBoard = () => {
           </div>
         ))}
       </div>
-      <div onClick={moveBlockDownClickHandler}>MOVE DOWN</div>
+      <div onClick={moveBlockDown}>MOVE DOWN</div>
       <div onClick={moveBlockLeft}>MOVE LEFT</div>
       <div onClick={moveBlockRight}>MOVE RIGHT</div>
       <div onClick={stopDescent}>STOP DESCENT</div>
