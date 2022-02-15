@@ -76,7 +76,10 @@ const GameBoard = () => {
         break;
       case ' ':
         event.preventDefault();
-        if (statusRef.current === preGame || statusRef.current === gameOver) {
+        if (statusRef.current === preGame) {
+          startGame();
+        } else if (statusRef.current === gameOver) {
+          dispatch(gameBoardActions.resetGame());
           startGame();
         } else if (statusRef.current === inProgress) {
           pauseGame();

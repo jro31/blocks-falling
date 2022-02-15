@@ -222,6 +222,7 @@ const gameBoardSlice = createSlice({
     finishGame(state) {
       state.status = gameOver;
     },
+    resetGame: () => initialState,
   },
 });
 
