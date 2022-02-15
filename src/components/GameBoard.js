@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { gameBoardActions, gameOver, inProgress, paused, preGame } from '../store/game-board';
 import useMoveBlock from '../hooks/use-move-block';
+import useRotateBlock from '../hooks/use-rotate-block';
 
 let timeOut;
 export let squaresRef;
@@ -20,6 +21,7 @@ const GameBoard = () => {
   statusRef.current = status;
 
   const moveBlock = useMoveBlock();
+  const rotateBlock = useRotateBlock();
 
   const startGame = () => {
     dispatch(gameBoardActions.startGame());
@@ -50,14 +52,12 @@ const GameBoard = () => {
     moveBlock('right');
   };
 
-  // Test function - Can be deleted
-  const stopDescent = () => {
-    dispatch(gameBoardActions.stopTimer());
+  const rotateAntiClockwise = () => {
+    rotateBlock('anti-clockwise');
   };
 
-  // Test function - Can be deleted
-  const startDescent = () => {
-    dispatch(gameBoardActions.startTimer());
+  const rotateClockwise = () => {
+    rotateBlock('clockwise');
   };
 
   const handleKeyPress = event => {
@@ -73,6 +73,14 @@ const GameBoard = () => {
       case 'ArrowRight':
         event.preventDefault();
         moveBlockRight();
+        break;
+      case 'z':
+        event.preventDefault();
+        rotateAntiClockwise();
+        break;
+      case 'x':
+        event.preventDefault();
+        rotateClockwise();
         break;
       case ' ':
         event.preventDefault();
@@ -132,8 +140,6 @@ const GameBoard = () => {
         ))}
       </div>
       <h1>{status}</h1>
-      <div onClick={stopDescent}>STOP DESCENT</div>
-      <div onClick={startDescent}>START DESCENT</div>
     </Fragment>
   );
 };
