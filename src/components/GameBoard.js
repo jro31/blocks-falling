@@ -114,7 +114,7 @@ const GameBoard = () => {
   return (
     <Fragment>
       <div className='gameboard-container'>
-        {Array.from(new Array(Object.keys(squares).length), (_, i) => i + 1).map(row => (
+        {Array.from(new Array(Object.keys(squares).length), (_, i) => i).map(row => (
           <div key={`row-${row}`} className='row'>
             {Array.from(
               new Array(Object.keys(squares[Object.keys(squares)[0]]).length),
