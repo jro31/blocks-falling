@@ -5,9 +5,11 @@ export const inProgress = 'in-progress';
 export const paused = 'paused';
 export const gameOver = 'game-over';
 
+// prettier-ignore
 const initialSquares = () => {
-  // prettier-ignore
-  return Array.from(new Array(20), (_, i) => i + 1).reduce((acc,curr)=> (acc[curr]= Array.from(new Array(10), (_, i) => i + 1).reduce((acc,curr)=> (acc[curr]={status: 'empty', color: ''}, acc), {}), acc),{})
+  const returnObject = Array.from(new Array(20), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = { status: 'empty', color: '' }, acc), {}), acc),{})
+  returnObject[0] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => ((acc[curr] = { status: 'dead', color: 'transparent' }), acc), {});
+  return returnObject;
 };
 
 export const blocks = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
@@ -184,6 +186,7 @@ const gameBoardSlice = createSlice({
       if (canAddBlock(newBlock, current(state.squares))) {
         state.squares = mergeNestedObjects(current(state.squares), newBlockShape(newBlock));
       } else {
+        // TODO
       }
       state.timer = { isLive: true };
     },
