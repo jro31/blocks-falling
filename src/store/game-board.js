@@ -150,9 +150,11 @@ const newBlockZ = () => {
   };
 };
 
+// prettier-ignore
 const canAddBlock = (nextBlock, currentGrid) => {
-  // TODO
-  return true;
+  if (Object.keys(currentGrid[0]).map(square => currentGrid[0][square].status).includes(settled)) return false
+  if (Object.keys(nextBlock[1]).map(square => currentGrid[1][square].status).includes(settled)) return false
+  return true
 };
 
 const mergeNestedObjects = (existingObject, newObject) => {
@@ -171,16 +173,18 @@ const mergeNestedObjects = (existingObject, newObject) => {
   return returnObject;
 };
 
+const initialState = {
+  squares: initialSquares(),
+  speed: 1000,
+  liveBlock: blocks[Math.floor(Math.random() * blocks.length)],
+  blockCounter: 0,
+  timer: { isLive: true },
+  status: preGame,
+};
+
 const gameBoardSlice = createSlice({
   name: 'game-board',
-  initialState: {
-    squares: initialSquares(),
-    speed: 1000,
-    liveBlock: blocks[Math.floor(Math.random() * blocks.length)],
-    blockCounter: 0,
-    timer: { isLive: true },
-    status: preGame,
-  },
+  initialState,
   reducers: {
     nextBlock(state) {
       let newBlock = blocks[Math.floor(Math.random() * blocks.length)];
@@ -188,12 +192,13 @@ const gameBoardSlice = createSlice({
       state.liveBlock = newBlock;
       if ((state.blockCounter + 1) % 10 === 0) state.speed = state.speed * 0.75;
       state.blockCounter = state.blockCounter + 1;
-      if (canAddBlock(newBlock, current(state.squares))) {
+
+      if (canAddBlock(newBlockShape(newBlock), current(state.squares))) {
         state.squares = mergeNestedObjects(current(state.squares), newBlockShape(newBlock));
+        state.timer = { isLive: true };
       } else {
         state.status = gameOver;
       }
-      state.timer = { isLive: true };
     },
     updateGameBoard(state, action) {
       state.squares = action.payload;
@@ -205,6 +210,7 @@ const gameBoardSlice = createSlice({
       state.timer = { isLive: false };
     },
     startGame(state) {
+      state.squares = initialState.squares;
       state.status = inProgress;
     },
     pauseGame(state) {

@@ -128,9 +128,7 @@ const GameBoard = () => {
           </div>
         ))}
       </div>
-      <div onClick={moveBlockDown}>MOVE DOWN</div>
-      <div onClick={moveBlockLeft}>MOVE LEFT</div>
-      <div onClick={moveBlockRight}>MOVE RIGHT</div>
+      <h1>{status}</h1>
       <div onClick={stopDescent}>STOP DESCENT</div>
       <div onClick={startDescent}>START DESCENT</div>
     </Fragment>
