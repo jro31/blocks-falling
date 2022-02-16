@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux';
 import useCanMoveBlock from './use-can-move-block';
 import { dead, empty, gameBoardActions, inProgress, live, settled } from '../store/game-board';
 
-import { squaresRef } from '../components/GameBoard';
-import { statusRef } from '../components/GameBoard';
+import { squaresRef, statusRef } from '../components/GameBoard';
 
 const useMoveBlock = () => {
   const dispatch = useDispatch();
@@ -52,6 +51,7 @@ const useMoveBlock = () => {
           );
 
         dispatch(gameBoardActions.updateGameBoard(newObject));
+        // TODO - Clear any complete lines, move above blocks down
         dispatch(gameBoardActions.nextBlock());
       }
       dispatch(gameBoardActions.startTimer());
