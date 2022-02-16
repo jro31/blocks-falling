@@ -19,33 +19,63 @@ const useRotateBlock = () => {
     return returnObject;
   };
 
+  // TODO - Refactor
   const initialShapeGrid = () => {
+    let shape = initialShape();
     let returnObject = {};
-    const gridSize = Math.max(numberOfRows(initialShape()), numberOfColumns(initialShape()));
+    const gridSize = Math.max(numberOfRows(shape), numberOfColumns(shape));
     let lastRow;
+    let lastColumn;
 
-    uniqueRows(initialShape()).forEach(outerKey => {
+    uniqueRows(shape).forEach(outerKey => {
       if (!returnObject[outerKey]) returnObject[outerKey] = {};
-      let lastColumn;
-      uniqueColumns(initialShape()).forEach(innerKey => {
-        if (initialShape()[outerKey] && initialShape()[outerKey][innerKey]) {
-          returnObject[outerKey][innerKey] = initialShape()[outerKey][innerKey];
+      uniqueColumns(shape).forEach(innerKey => {
+        if (shape[outerKey] && shape[outerKey][innerKey]) {
+          returnObject[outerKey][innerKey] = shape[outerKey][innerKey];
         } else {
           returnObject[outerKey][innerKey] = { status: empty, color: '' };
         }
-        lastColumn = innerKey; // Update this
+        if (innerKey === uniqueColumns(shape)[uniqueColumns(shape).length - 1]) {
+          lastColumn = innerKey;
+        }
       });
       [...Array(gridSize - Object.keys(returnObject[outerKey]).length)].forEach(
         (_, index) =>
           (returnObject[outerKey][lastColumn + (index + 1)] = { status: empty, color: '' })
       );
-      lastRow = outerKey; // Update this
+      if (outerKey === uniqueRows(shape)[uniqueRows(shape).length - 1]) lastRow = outerKey;
     });
 
     [...Array(gridSize - Object.keys(returnObject).length)].forEach((_, index) => {
       returnObject[lastRow + (index + 1)] = {};
-      uniqueColumns(initialShape()).forEach(innerKey => {
+      uniqueColumns(shape).forEach(innerKey => {
         returnObject[lastRow + (index + 1)][innerKey] = { status: empty, color: '' };
+      });
+    });
+
+    return returnObject;
+  };
+
+  // prettier-ignore
+  const rotateClockwise = () => {
+    const grid = initialShapeGrid();
+    const gridSize = Object.keys(grid).length;
+    const startingRow = parseInt(Object.keys(grid)[0]);
+    const startingColumn = parseInt(Object.keys(grid[startingRow])[0]);
+    let returnObject = {};
+    let adjustedStartingRow
+    let adjustedStartingColumn
+
+    Array.from({ length: gridSize }, (_, i) => i + startingRow).forEach((rowKey, rowIndex) => {
+      returnObject[rowKey] = {};
+      Array.from({ length: gridSize }, (_, i) => i + startingColumn).forEach((columnKey, columnIndex) => {
+        returnObject[rowKey][columnKey] = {};
+        if (gridSize === 3) {
+          adjustedStartingRow = rowIndex + 1
+          adjustedStartingColumn = columnIndex + 1
+
+          returnObject[rowKey][columnKey] = { ...grid[(adjustedStartingRow - ((adjustedStartingRow - (gridSize - 1)) + (adjustedStartingColumn - (gridSize - 1)))) + (startingRow - 1)][(adjustedStartingColumn - (adjustedStartingColumn - adjustedStartingRow)) + (startingColumn - 1)] }
+        }
       });
     });
 
@@ -138,9 +168,8 @@ const useRotateBlock = () => {
 
   const rotateBlock = (direction = null) => {
     if (statusRef.current === inProgress) {
-      console.log(initialShape());
-      // newShape(initialShape(), 'clockwise');
-      console.log(initialShapeGrid());
+      // console.log(initialShapeGrid());
+      console.log(rotateClockwise());
     }
 
     // Get the initial shape
