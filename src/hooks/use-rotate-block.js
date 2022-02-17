@@ -1,7 +1,11 @@
+import { useDispatch } from 'react-redux';
+
 import { squaresRef, statusRef } from '../components/GameBoard';
-import { live, inProgress, empty } from '../store/game-board';
+import { live, inProgress, empty, gameBoardActions } from '../store/game-board';
 
 const useRotateBlock = () => {
+  const dispatch = useDispatch();
+
   const initialShape = () => {
     let returnObject = {};
 
@@ -100,6 +104,29 @@ const useRotateBlock = () => {
     }
   };
 
+  const newGameBoard = direction => {
+    // TODO - Handle direction
+
+    const rotatedGrid = rotateClockwise();
+
+    let existingObject = JSON.parse(JSON.stringify(squaresRef.current));
+    let newObject = JSON.parse(JSON.stringify(existingObject));
+
+    Object.keys(existingObject).forEach(outerKey =>
+      Object.keys(existingObject[outerKey]).forEach(innerKey => {
+        // TODO - Handle the new grid not fitting
+        if (existingObject[outerKey][innerKey].status === live) {
+          newObject[outerKey][innerKey] = { status: empty, color: '' };
+        }
+        if (rotatedGrid[outerKey] && rotatedGrid[outerKey][innerKey]) {
+          newObject[outerKey][innerKey] = { ...rotatedGrid[outerKey][innerKey] };
+        }
+      })
+    );
+
+    return newObject;
+  };
+
   const uniqueRows = shape => {
     return Object.keys(shape).map(rowKey => parseInt(rowKey));
   };
@@ -115,24 +142,6 @@ const useRotateBlock = () => {
     return [...new Set(allColumns(shape))];
   };
 
-  const columnAmountsObject = shape => {
-    let columnAmounts = {};
-
-    uniqueColumns(shape).forEach(
-      column => (columnAmounts[column] = allColumns(shape).filter(x => x === column).length)
-    );
-
-    return columnAmounts;
-  };
-
-  const mostPopulatedColumn = shape => {
-    return Object.keys(columnAmountsObject(shape)).find(
-      columnKey =>
-        columnAmountsObject(shape)[columnKey] ===
-        Math.max(...Object.values(columnAmountsObject(shape)))
-    );
-  };
-
   const numberOfRows = shape => {
     return uniqueRows(shape).length;
   };
@@ -141,58 +150,10 @@ const useRotateBlock = () => {
     return Math.max(...uniqueColumns(shape)) - Math.min(...uniqueColumns(shape)) + 1;
   };
 
-  const newShape = (startingShape, direction) => {
-    let returnObject = {};
-
-    // Take max of column/row amounts - This will be a grid
-    // The top-left point of this grid will be the first row and first column
-    // This point should be the start point of the new shape, noting that it won't necessarily be populated
-
-    const gridSize = Math.max(numberOfRows(startingShape), numberOfColumns(startingShape));
-    const gridTopLeft = [uniqueRows(startingShape)[0], uniqueColumns(startingShape)[0]];
-
-    let grid = {};
-
-    // First row should stay the same
-
-    if (direction === 'clockwise') {
-      Object.keys(startingShape).forEach(outerKey =>
-        Object.keys(startingShape[outerKey]).forEach(innerKey => {
-          // if (!returnObject[outerKey]) returnObject[outerKey] = {};
-          if (!returnObject[outerKey][innerKey]) returnObject[outerKey][innerKey] = {};
-        })
-      );
-    }
-
-    // if (numberOfRows(startingShape) >= 3) {
-    //   // TODO - Unfinished
-    //   let pivotRow = uniqueRows(startingShape)[1];
-
-    //   numberOfColumns(startingShape).forEach(
-    //     (_, index) => (returnObject[pivotRow + (index - 1)] = {})
-    //   );
-
-    //   console.log(returnObject);
-    // } else if (numberOfColumns(startingShape) >= 3) {
-    //   const baseRow = uniqueRows(startingShape)[1];
-    //   const baseColumn = mostPopulatedColumn(startingShape);
-    // }
-
-    // TODO
-    // If three or four consecutive horizontal squares, pivot on the middle of these (for L, J, I and T when horizontal)
-    // If three or four consecutive vertical squares, pivot on the middle of these (for L, J, I and T when vertical)
-    // Otherwise (Z and S) pivot on one of the two centre squares
-  };
-
   const rotateBlock = (direction = null) => {
     if (statusRef.current === inProgress) {
-      // console.log(initialShapeGrid());
-      console.log(rotateClockwise());
+      dispatch(gameBoardActions.updateGameBoard(newGameBoard(direction)));
     }
-
-    // Get the initial shape
-    // From the initial shape, establish the new shape
-    // Fit the new shape onto the grid, moving it down if at the very top, or moving it up if it doesn't fit with the surrounding settled blocks
   };
 
   return rotateBlock;
