@@ -1,10 +1,12 @@
 import { useDispatch } from 'react-redux';
 
-import { squaresRef, statusRef } from '../components/GameBoard';
+import { squaresRef, statusRef, liveBlockRef } from '../components/GameBoard';
 import { live, inProgress, empty, gameBoardActions } from '../store/game-board';
+import useRotateIBlock from './use-rotate-i-block';
 
 const useRotateBlock = () => {
   const dispatch = useDispatch();
+  const rotateIBlock = useRotateIBlock();
 
   const initialShape = () => {
     let returnObject = {};
@@ -152,7 +154,17 @@ const useRotateBlock = () => {
 
   const rotateBlock = (direction = null) => {
     if (statusRef.current === inProgress) {
-      dispatch(gameBoardActions.updateGameBoard(newGameBoard(direction)));
+      // console.log(initialShape());
+      // console.log(initialShapeGrid());
+
+      if (liveBlockRef.current === 'I') {
+        console.log('🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬');
+        rotateIBlock(initialShape());
+      }
+
+      newGameBoard(direction);
+
+      // dispatch(gameBoardActions.updateGameBoard(newGameBoard(direction)));
     }
   };
 

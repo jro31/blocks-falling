@@ -8,6 +8,7 @@ import useRotateBlock from '../hooks/use-rotate-block';
 let timeOut;
 export let squaresRef;
 export let statusRef;
+export let liveBlockRef;
 
 const GameBoard = () => {
   const dispatch = useDispatch();
@@ -15,10 +16,13 @@ const GameBoard = () => {
   const speed = useSelector(state => state.gameBoard.speed);
   const timer = useSelector(state => state.gameBoard.timer);
   const status = useSelector(state => state.gameBoard.status);
+  const liveBlock = useSelector(state => state.gameBoard.liveBlock);
   squaresRef = useRef(squares);
   squaresRef.current = squares;
   statusRef = useRef(status);
   statusRef.current = status;
+  liveBlockRef = useRef(liveBlock);
+  liveBlockRef.current = liveBlock;
 
   const moveBlock = useMoveBlock();
   const rotateBlock = useRotateBlock();

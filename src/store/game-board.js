@@ -10,6 +10,8 @@ export const dead = 'dead';
 export const settled = 'settled';
 export const empty = 'empty';
 
+export const iColor = 'red';
+
 // prettier-ignore
 const initialSquares = () => {
   const returnObject = Array.from(new Array(20), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = { status: empty, color: '' }, acc), {}), acc),{})
@@ -48,7 +50,7 @@ const newBlockShape = block => {
 };
 
 const newBlockI = () => {
-  const blockI = blockObject('red');
+  const blockI = blockObject(iColor);
 
   return {
     1: {
