@@ -6,12 +6,26 @@ const useRotateIBlock = () => {
   let returnBlock = {};
 
   const rowKeyIntegers = () => Object.keys(returnBlock).map(rowKey => parseInt(rowKey));
+  const columnKeyIntegers = () => {
+    let columnsArray = [];
+
+    Object.keys(returnBlock).forEach(rowKey => columnsArray.push(Object.keys(returnBlock[rowKey])));
+    columnsArray.flat().map(column => parseInt(column));
+
+    return [...new Set(columnsArray.flat().map(column => parseInt(column)))];
+  };
 
   const rowIsAboveGameBoard = () => rowKeyIntegers().some(rowKey => rowKey < 1);
   const rowIsBeneathGameBoard = () => rowKeyIntegers().some(rowKey => rowKey > 20);
+  const columnIsLeftOfGameBoard = () => columnKeyIntegers().some(columnKey => columnKey < 1);
+  const columnIsRightOfGameBoard = () => columnKeyIntegers().some(columnKey => columnKey > 20);
 
-  const renameRowKeys = (oldKey, newKey) => {
+  const renameRowKey = (oldKey, newKey) => {
     delete Object.assign(returnBlock, { [newKey]: returnBlock[oldKey] })[oldKey];
+  };
+
+  const renameColumnKey = (rowKey, oldKey, newKey) => {
+    delete Object.assign(returnBlock[rowKey], { [newKey]: returnBlock[rowKey][oldKey] })[oldKey];
   };
 
   const offsetForTopOfGameBoard = () => {
@@ -20,20 +34,36 @@ const useRotateIBlock = () => {
     const lowestRow = Math.min(...rowKeyIntegers());
     rowKeyIntegers()
       .reverse()
-      .forEach(rowKey => renameRowKeys(rowKey, rowKey - (lowestRow - 1)));
+      .forEach(rowKey => renameRowKey(rowKey, rowKey - (lowestRow - 1)));
   };
 
   const offsetForBottomOfGameBoard = () => {
     if (!rowIsBeneathGameBoard()) return;
 
     const highestRow = Math.max(...rowKeyIntegers());
-    Object.keys(returnBlock).forEach(rowKey => renameRowKeys(rowKey, rowKey - (highestRow - 20)));
+    rowKeyIntegers().forEach(rowKey => renameRowKey(rowKey, rowKey - (highestRow - 20)));
+  };
+
+  const offsetForLeftOfGameBoard = () => {
+    if (!columnIsLeftOfGameBoard()) return;
+
+    const leftestColumn = Math.min(...columnKeyIntegers());
+    const amountToShift = 0 - leftestColumn + 1;
+
+    rowKeyIntegers().forEach(rowKey =>
+      Object.keys(returnBlock[rowKey])
+        .reverse()
+        .forEach(columnKey => {
+          renameColumnKey(rowKey, parseInt(columnKey), parseInt(columnKey) + amountToShift);
+        })
+    );
   };
 
   const offsetForGameBoard = () => {
     offsetForTopOfGameBoard();
     offsetForBottomOfGameBoard();
-    // TODO - Offset for side of game board
+    offsetForLeftOfGameBoard();
+    // TODO - Offset for right of game board
   };
 
   const offsetForOtherBlocks = () => {
@@ -69,6 +99,8 @@ const useRotateIBlock = () => {
     }
 
     offsetPosition();
+
+    console.log(returnBlock);
 
     return returnBlock;
   };
