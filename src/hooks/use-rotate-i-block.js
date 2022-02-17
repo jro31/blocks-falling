@@ -4,6 +4,8 @@ import useRowKeyIntegers from './use-row-key-integers';
 import useColumnKeyIntegers from './use-column-key-integers';
 import useRowIsAboveGameBoard from './use-row-is-above-game-board';
 import useRowIsBeneathGameBoard from './use-row-is-beneath-game-board';
+import useColumnIsLeftOfGameBoard from './use-column-is-left-of-game-board';
+import useColumnIsRightOfGameBoard from './use-column-is-right-of-game-board';
 
 import { squaresRef } from '../components/GameBoard';
 import { iColor, live } from '../store/game-board';
@@ -15,15 +17,12 @@ const useRotateIBlock = () => {
   const columnKeyIntegers = useColumnKeyIntegers();
   const rowIsAboveGameBoard = useRowIsAboveGameBoard();
   const rowIsBeneathGameBoard = useRowIsBeneathGameBoard();
+  const columnIsLeftOfGameBoard = useColumnIsLeftOfGameBoard();
+  const columnIsRightOfGameBoard = useColumnIsRightOfGameBoard();
 
   const currentGameBoard = squaresRef.current;
 
   let returnBlock = {};
-
-  const columnIsLeftOfGameBoard = () =>
-    columnKeyIntegers(returnBlock).some(columnKey => columnKey < 1);
-  const columnIsRightOfGameBoard = () =>
-    columnKeyIntegers(returnBlock).some(columnKey => columnKey > 10);
 
   const offsetForTopOfGameBoard = () => {
     if (!rowIsAboveGameBoard(returnBlock)) return;
@@ -44,7 +43,7 @@ const useRotateIBlock = () => {
   };
 
   const offsetForLeftOfGameBoard = () => {
-    if (!columnIsLeftOfGameBoard()) return;
+    if (!columnIsLeftOfGameBoard(returnBlock)) return;
 
     const leftestColumn = Math.min(...columnKeyIntegers(returnBlock));
     const amountToShift = 0 - leftestColumn + 1;
@@ -64,7 +63,7 @@ const useRotateIBlock = () => {
   };
 
   const offsetForRightOfGameBoard = () => {
-    if (!columnIsRightOfGameBoard()) return;
+    if (!columnIsRightOfGameBoard(returnBlock)) return;
 
     const rightestColumn = Math.max(...columnKeyIntegers(returnBlock));
     const amountToShift = rightestColumn - 10;
