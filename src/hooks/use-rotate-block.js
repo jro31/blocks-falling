@@ -106,22 +106,18 @@ const useRotateBlock = () => {
     }
   };
 
-  const newGameBoard = direction => {
-    // TODO - Handle direction
-
-    const rotatedGrid = rotateClockwise();
-
+  const newGameBoard = rotatedBlock => {
     let existingObject = JSON.parse(JSON.stringify(squaresRef.current));
     let newObject = JSON.parse(JSON.stringify(existingObject));
 
     Object.keys(existingObject).forEach(outerKey =>
       Object.keys(existingObject[outerKey]).forEach(innerKey => {
-        // TODO - Handle the new grid not fitting
+        // TODO - Handle the new block not fitting
         if (existingObject[outerKey][innerKey].status === live) {
           newObject[outerKey][innerKey] = { status: empty, color: '' };
         }
-        if (rotatedGrid[outerKey] && rotatedGrid[outerKey][innerKey]) {
-          newObject[outerKey][innerKey] = { ...rotatedGrid[outerKey][innerKey] };
+        if (rotatedBlock[outerKey] && rotatedBlock[outerKey][innerKey]) {
+          newObject[outerKey][innerKey] = { ...rotatedBlock[outerKey][innerKey] };
         }
       })
     );
@@ -154,17 +150,11 @@ const useRotateBlock = () => {
 
   const rotateBlock = (direction = null) => {
     if (statusRef.current === inProgress) {
-      // console.log(initialShape());
-      // console.log(initialShapeGrid());
-
       if (liveBlockRef.current === 'I') {
-        console.log('🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬🐬');
-        rotateIBlock(initialShape());
+        dispatch(gameBoardActions.updateGameBoard(newGameBoard(rotateIBlock(initialShape()))));
       }
 
-      newGameBoard(direction);
-
-      // dispatch(gameBoardActions.updateGameBoard(newGameBoard(direction)));
+      // newGameBoard(direction);
     }
   };
 
