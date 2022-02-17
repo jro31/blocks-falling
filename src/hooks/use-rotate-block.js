@@ -112,10 +112,10 @@ const useRotateBlock = () => {
 
     Object.keys(existingObject).forEach(outerKey =>
       Object.keys(existingObject[outerKey]).forEach(innerKey => {
-        // TODO - Handle the new block not fitting
         if (existingObject[outerKey][innerKey].status === live) {
           newObject[outerKey][innerKey] = { status: empty, color: '' };
         }
+        // TODO - Handle the new block not fitting
         if (rotatedBlock[outerKey] && rotatedBlock[outerKey][innerKey]) {
           newObject[outerKey][innerKey] = { ...rotatedBlock[outerKey][innerKey] };
         }
