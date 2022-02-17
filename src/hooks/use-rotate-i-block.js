@@ -1,8 +1,14 @@
+import useRenameRowKey from './use-rename-row-key';
+import useRenameColumnKey from './use-rename-column-key';
+
 import { squaresRef } from '../components/GameBoard';
 import { iColor, live } from '../store/game-board';
 
 const useRotateIBlock = () => {
   const currentGameBoard = squaresRef.current;
+  const renameRowKey = useRenameRowKey();
+  const renameColumnKey = useRenameColumnKey();
+
   let returnBlock = {};
 
   const rowKeyIntegers = () => Object.keys(returnBlock).map(rowKey => parseInt(rowKey));
@@ -20,13 +26,9 @@ const useRotateIBlock = () => {
   const columnIsLeftOfGameBoard = () => columnKeyIntegers().some(columnKey => columnKey < 1);
   const columnIsRightOfGameBoard = () => columnKeyIntegers().some(columnKey => columnKey > 10);
 
-  const renameRowKey = (oldKey, newKey) => {
-    delete Object.assign(returnBlock, { [newKey]: returnBlock[oldKey] })[oldKey];
-  };
-
-  const renameColumnKey = (rowKey, oldKey, newKey) => {
-    delete Object.assign(returnBlock[rowKey], { [newKey]: returnBlock[rowKey][oldKey] })[oldKey];
-  };
+  // const renameColumnKey = (rowKey, oldKey, newKey) => {
+  //   delete Object.assign(returnBlock[rowKey], { [newKey]: returnBlock[rowKey][oldKey] })[oldKey];
+  // };
 
   const offsetForTopOfGameBoard = () => {
     if (!rowIsAboveGameBoard()) return;
@@ -34,14 +36,16 @@ const useRotateIBlock = () => {
     const lowestRow = Math.min(...rowKeyIntegers());
     rowKeyIntegers()
       .reverse()
-      .forEach(rowKey => renameRowKey(rowKey, rowKey - (lowestRow - 1)));
+      .forEach(rowKey => renameRowKey(returnBlock, rowKey, rowKey - (lowestRow - 1)));
   };
 
   const offsetForBottomOfGameBoard = () => {
     if (!rowIsBeneathGameBoard()) return;
 
     const highestRow = Math.max(...rowKeyIntegers());
-    rowKeyIntegers().forEach(rowKey => renameRowKey(rowKey, rowKey - (highestRow - 20)));
+    rowKeyIntegers().forEach(rowKey =>
+      renameRowKey(returnBlock, rowKey, rowKey - (highestRow - 20))
+    );
   };
 
   const offsetForLeftOfGameBoard = () => {
@@ -54,7 +58,12 @@ const useRotateIBlock = () => {
       Object.keys(returnBlock[rowKey])
         .reverse()
         .forEach(columnKey => {
-          renameColumnKey(rowKey, parseInt(columnKey), parseInt(columnKey) + amountToShift);
+          renameColumnKey(
+            returnBlock,
+            rowKey,
+            parseInt(columnKey),
+            parseInt(columnKey) + amountToShift
+          );
         })
     );
   };
@@ -67,7 +76,12 @@ const useRotateIBlock = () => {
 
     rowKeyIntegers().forEach(rowKey =>
       Object.keys(returnBlock[rowKey]).forEach(columnKey => {
-        renameColumnKey(rowKey, parseInt(columnKey), parseInt(columnKey) - amountToShift);
+        renameColumnKey(
+          returnBlock,
+          rowKey,
+          parseInt(columnKey),
+          parseInt(columnKey) - amountToShift
+        );
       })
     );
   };
@@ -113,7 +127,7 @@ const useRotateIBlock = () => {
 
     offsetPosition();
 
-    console.log(returnBlock);
+    // console.log(returnBlock);
 
     return returnBlock;
   };
