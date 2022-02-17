@@ -62,6 +62,7 @@ const useRotateBlock = () => {
     const gridSize = Object.keys(grid).length;
     const startingRow = parseInt(Object.keys(grid)[0]);
     const startingColumn = parseInt(Object.keys(grid[startingRow])[0]);
+    const startingDifference = startingRow - startingColumn
     let returnObject = {};
     let adjustedStartingRow
     let adjustedStartingColumn
@@ -70,16 +71,33 @@ const useRotateBlock = () => {
       returnObject[rowKey] = {};
       Array.from({ length: gridSize }, (_, i) => i + startingColumn).forEach((columnKey, columnIndex) => {
         returnObject[rowKey][columnKey] = {};
-        if (gridSize === 3) {
-          adjustedStartingRow = rowIndex + 1
-          adjustedStartingColumn = columnIndex + 1
+        adjustedStartingRow = rowIndex + 1
+        adjustedStartingColumn = columnIndex + 1
 
+        if (gridSize === 3) {
           returnObject[rowKey][columnKey] = { ...grid[(adjustedStartingRow - ((adjustedStartingRow - (gridSize - 1)) + (adjustedStartingColumn - (gridSize - 1)))) + (startingRow - 1)][(adjustedStartingColumn - (adjustedStartingColumn - adjustedStartingRow)) + (startingColumn - 1)] }
+        } else if (gridSize === 4) {
+          returnObject[rowKey][columnKey] = { ...grid[rotationMatrix(adjustedStartingColumn) + (startingRow - 1)][rowKey - startingDifference] }
         }
       });
     });
 
     return returnObject;
+  };
+
+  const rotationMatrix = number => {
+    switch (number) {
+      case 1:
+        return 4;
+      case 2:
+        return 3;
+      case 3:
+        return 2;
+      case 4:
+        return 1;
+      default:
+        throw new Error('Invalid number passed to rotation matrix');
+    }
   };
 
   const uniqueRows = shape => {
