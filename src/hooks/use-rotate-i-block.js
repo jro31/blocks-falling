@@ -1,16 +1,17 @@
+import useLiveBlockShape from './use-live-block-shape';
 import useOffsetPosition from './use-offset-position';
 
-import { squaresRef } from '../components/GameBoard';
 import { iColor, live } from '../store/game-board';
 
 const useRotateIBlock = () => {
+  const liveBlockShape = useLiveBlockShape();
   const offsetPosition = useOffsetPosition();
-
-  const currentGameBoard = squaresRef.current;
 
   let returnBlock = {};
 
-  const rotateIBlock = initialShape => {
+  const rotateIBlock = () => {
+    const initialShape = liveBlockShape();
+
     returnBlock = {};
     const position = () => (Object.keys(initialShape).length === 1 ? 'horizontal' : 'vertical');
 
@@ -34,8 +35,6 @@ const useRotateIBlock = () => {
     }
 
     offsetPosition(returnBlock);
-
-    // console.log(returnBlock);
 
     return returnBlock;
   };
