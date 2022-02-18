@@ -18,7 +18,6 @@ const useMoveBlockDown = () => {
 
     if (canMove('down')) {
       const initialShape = liveBlockShape();
-
       let movedBlock = {};
 
       Object.keys(initialShape).forEach(rowKey => {

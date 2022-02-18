@@ -12,9 +12,9 @@ const useRotateBlock = () => {
 
   const rotateBlock = (direction = null) => {
     if (statusRef.current === inProgress) {
-      if (liveBlockRef.current === 'I') {
+      if (liveBlockRef.current === 'I')
         dispatch(gameBoardActions.updateGameBoard(updatedGameBoard(rotateIBlock())));
-      }
+      if (liveBlockRef.current === 'O') return;
     }
   };
 
