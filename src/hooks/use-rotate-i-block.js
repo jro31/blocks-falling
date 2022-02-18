@@ -1,36 +1,14 @@
-import useOffsetForTopOfGameBoard from './use-offset-for-top-of-game-board';
-import useOffsetForBottomOfGameBoard from './use-offset-for-bottom-of-game-board';
-import useOffsetForLeftOfGameBoard from './use-offset-for-left-of-game-board';
-import useOffsetForRightOfGameBoard from './use-offset-for-right-of-game-board';
+import useOffsetPosition from './use-offset-position';
 
 import { squaresRef } from '../components/GameBoard';
 import { iColor, live } from '../store/game-board';
 
 const useRotateIBlock = () => {
-  const offsetForTopOfGameBoard = useOffsetForTopOfGameBoard();
-  const offsetForBottomOfGameBoard = useOffsetForBottomOfGameBoard();
-  const offsetForLeftOfGameBoard = useOffsetForLeftOfGameBoard();
-  const offsetForRightOfGameBoard = useOffsetForRightOfGameBoard();
+  const offsetPosition = useOffsetPosition();
 
   const currentGameBoard = squaresRef.current;
 
   let returnBlock = {};
-
-  const offsetForGameBoard = () => {
-    offsetForTopOfGameBoard(returnBlock);
-    offsetForBottomOfGameBoard(returnBlock);
-    offsetForLeftOfGameBoard(returnBlock);
-    offsetForRightOfGameBoard(returnBlock);
-  };
-
-  const offsetForOtherBlocks = () => {
-    // TODO
-  };
-
-  const offsetPosition = () => {
-    offsetForGameBoard();
-    offsetForOtherBlocks();
-  };
 
   const rotateIBlock = initialShape => {
     returnBlock = {};
@@ -55,7 +33,7 @@ const useRotateIBlock = () => {
       });
     }
 
-    offsetPosition();
+    offsetPosition(returnBlock);
 
     // console.log(returnBlock);
 
