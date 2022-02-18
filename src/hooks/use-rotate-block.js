@@ -9,12 +9,22 @@ const useRotateBlock = () => {
   const dispatch = useDispatch();
   const rotateIBlock = useRotateIBlock();
   const updatedGameBoard = useUpdatedGameBoard();
+  let rotatedBlock;
 
   const rotateBlock = (direction = null) => {
+    rotatedBlock = null;
+
     if (statusRef.current === inProgress) {
-      if (liveBlockRef.current === 'I')
-        dispatch(gameBoardActions.updateGameBoard(updatedGameBoard(rotateIBlock())));
+      if (liveBlockRef.current === 'I') rotatedBlock = rotateIBlock();
+      // TODO - J
+      // TODO - L
       if (liveBlockRef.current === 'O') return;
+      // TODO - S
+      // TODO - T
+      // TODO - Z
+      if (!rotatedBlock) return;
+
+      dispatch(gameBoardActions.updateGameBoard(updatedGameBoard(rotatedBlock)));
     }
   };
 

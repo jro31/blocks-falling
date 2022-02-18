@@ -1,19 +1,17 @@
 import useRowIsBeneathGameBoard from './use-row-is-beneath-game-board';
 import useRowKeyIntegers from './use-row-key-integers';
-import useRenameRowKey from './use-rename-row-key';
+import useShiftBlockUp from './use-shift-block-up';
 
 const useOffsetForBottomOfGameBoard = () => {
   const rowIsBeneathGameBoard = useRowIsBeneathGameBoard();
   const rowKeyIntegers = useRowKeyIntegers();
-  const renameRowKey = useRenameRowKey();
+  const shiftBlockUp = useShiftBlockUp();
 
   const offsetForBottomOfGameBoard = block => {
     if (!rowIsBeneathGameBoard(block)) return;
 
     const highestRow = Math.max(...rowKeyIntegers(block));
-    rowKeyIntegers(block).forEach(rowKey =>
-      renameRowKey(block, rowKey, rowKey - (highestRow - 20))
-    );
+    shiftBlockUp(block, highestRow - 20);
   };
 
   return offsetForBottomOfGameBoard;
