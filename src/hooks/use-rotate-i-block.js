@@ -1,46 +1,26 @@
-import useRenameRowKey from './use-rename-row-key';
 import useRenameColumnKey from './use-rename-column-key';
 import useRowKeyIntegers from './use-row-key-integers';
 import useColumnKeyIntegers from './use-column-key-integers';
-import useRowIsAboveGameBoard from './use-row-is-above-game-board';
-import useRowIsBeneathGameBoard from './use-row-is-beneath-game-board';
 import useColumnIsLeftOfGameBoard from './use-column-is-left-of-game-board';
 import useColumnIsRightOfGameBoard from './use-column-is-right-of-game-board';
+import useOffsetForTopOfGameBoard from './use-offset-for-top-of-game-board';
+import useOffsetForBottomOfGameBoard from './use-offset-for-bottom-of-game-board';
 
 import { squaresRef } from '../components/GameBoard';
 import { iColor, live } from '../store/game-board';
 
 const useRotateIBlock = () => {
-  const renameRowKey = useRenameRowKey();
   const renameColumnKey = useRenameColumnKey();
   const rowKeyIntegers = useRowKeyIntegers();
   const columnKeyIntegers = useColumnKeyIntegers();
-  const rowIsAboveGameBoard = useRowIsAboveGameBoard();
-  const rowIsBeneathGameBoard = useRowIsBeneathGameBoard();
   const columnIsLeftOfGameBoard = useColumnIsLeftOfGameBoard();
   const columnIsRightOfGameBoard = useColumnIsRightOfGameBoard();
+  const offsetForTopOfGameBoard = useOffsetForTopOfGameBoard();
+  const offsetForBottomOfGameBoard = useOffsetForBottomOfGameBoard();
 
   const currentGameBoard = squaresRef.current;
 
   let returnBlock = {};
-
-  const offsetForTopOfGameBoard = () => {
-    if (!rowIsAboveGameBoard(returnBlock)) return;
-
-    const lowestRow = Math.min(...rowKeyIntegers(returnBlock));
-    rowKeyIntegers(returnBlock)
-      .reverse()
-      .forEach(rowKey => renameRowKey(returnBlock, rowKey, rowKey - (lowestRow - 1)));
-  };
-
-  const offsetForBottomOfGameBoard = () => {
-    if (!rowIsBeneathGameBoard(returnBlock)) return;
-
-    const highestRow = Math.max(...rowKeyIntegers(returnBlock));
-    rowKeyIntegers(returnBlock).forEach(rowKey =>
-      renameRowKey(returnBlock, rowKey, rowKey - (highestRow - 20))
-    );
-  };
 
   const offsetForLeftOfGameBoard = () => {
     if (!columnIsLeftOfGameBoard(returnBlock)) return;
@@ -81,8 +61,8 @@ const useRotateIBlock = () => {
   };
 
   const offsetForGameBoard = () => {
-    offsetForTopOfGameBoard();
-    offsetForBottomOfGameBoard();
+    offsetForTopOfGameBoard(returnBlock);
+    offsetForBottomOfGameBoard(returnBlock);
     offsetForLeftOfGameBoard();
     offsetForRightOfGameBoard();
   };
