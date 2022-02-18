@@ -1,5 +1,6 @@
 import useOverlapsOtherBlock from './use-overlaps-other-block';
 import useBlockCanBeHere from './use-block-can-be-here';
+import useShiftBlockUp from './use-shift-block-up';
 import useShiftBlockDown from './use-shift-block-down';
 import useShiftBlockLeft from './use-shift-block-left';
 import useShiftBlockRight from './use-shift-block-right';
@@ -7,12 +8,13 @@ import useShiftBlockRight from './use-shift-block-right';
 const useOffsetForOtherBlocks = () => {
   const overlapsOtherBlock = useOverlapsOtherBlock();
   const blockCanBeHere = useBlockCanBeHere();
+  const shiftBlockUp = useShiftBlockUp();
   const shiftBlockDown = useShiftBlockDown();
   const shiftBlockLeft = useShiftBlockLeft();
   const shiftBlockRight = useShiftBlockRight();
 
   const offsetForOtherBlocks = block => {
-    if (!overlapsOtherBlock(block)) return;
+    if (!overlapsOtherBlock(block)) return true;
 
     let shiftedBlock;
 
@@ -35,16 +37,63 @@ const useOffsetForOtherBlocks = () => {
     shiftBlockDown(shiftedBlock);
     if (blockCanBeHere(shiftedBlock)) {
       updateBlock();
-      return;
+      return true;
     }
+
+    resetShiftedBlock();
+    shiftBlockUp(shiftedBlock);
+    if (blockCanBeHere(shiftedBlock)) {
+      updateBlock();
+      return true;
+    }
+
+    resetShiftedBlock();
     shiftBlockLeft(shiftedBlock);
     if (blockCanBeHere(shiftedBlock)) {
       updateBlock();
-      return;
+      return true;
     }
 
-    // Cannot move to a position outside the gameboard
-    // Cannot move into other blocks
+    resetShiftedBlock();
+    shiftBlockRight(shiftedBlock);
+    if (blockCanBeHere(shiftedBlock)) {
+      updateBlock();
+      return true;
+    }
+
+    resetShiftedBlock();
+    shiftBlockDown(shiftedBlock);
+    shiftBlockLeft(shiftedBlock);
+    if (blockCanBeHere(shiftedBlock)) {
+      updateBlock();
+      return true;
+    }
+
+    resetShiftedBlock();
+    shiftBlockDown(shiftedBlock);
+    shiftBlockRight(shiftedBlock);
+    if (blockCanBeHere(shiftedBlock)) {
+      updateBlock();
+      return true;
+    }
+
+    resetShiftedBlock();
+    shiftBlockUp(shiftedBlock);
+    shiftBlockLeft(shiftedBlock);
+    if (blockCanBeHere(shiftedBlock)) {
+      updateBlock();
+      return true;
+    }
+
+    resetShiftedBlock();
+    shiftBlockUp(shiftedBlock);
+    shiftBlockRight(shiftedBlock);
+    if (blockCanBeHere(shiftedBlock)) {
+      updateBlock();
+      return true;
+    }
+
+    return false;
   };
 
   return offsetForOtherBlocks;

@@ -20,7 +20,7 @@ const useOffsetPosition = () => {
 
   const offsetPosition = block => {
     offsetForGameBoard(block);
-    offsetForOtherBlocks(block);
+    return offsetForOtherBlocks(block);
   };
 
   return offsetPosition;

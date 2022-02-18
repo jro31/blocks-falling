@@ -34,9 +34,11 @@ const useRotateIBlock = () => {
       });
     }
 
-    offsetPosition(returnBlock);
+    if (offsetPosition(returnBlock)) {
+      return returnBlock;
+    }
 
-    return returnBlock;
+    return false;
   };
 
   return rotateIBlock;
