@@ -1,11 +1,15 @@
 import useOverlapsOtherBlock from './use-overlaps-other-block';
 import useBlockCanBeHere from './use-block-can-be-here';
 import useShiftBlockDown from './use-shift-block-down';
+import useShiftBlockLeft from './use-shift-block-left';
+import useShiftBlockRight from './use-shift-block-right';
 
 const useOffsetForOtherBlocks = () => {
   const overlapsOtherBlock = useOverlapsOtherBlock();
   const blockCanBeHere = useBlockCanBeHere();
   const shiftBlockDown = useShiftBlockDown();
+  const shiftBlockLeft = useShiftBlockLeft();
+  const shiftBlockRight = useShiftBlockRight();
 
   const offsetForOtherBlocks = block => {
     if (!overlapsOtherBlock(block)) return;
@@ -29,6 +33,11 @@ const useOffsetForOtherBlocks = () => {
 
     resetShiftedBlock();
     shiftBlockDown(shiftedBlock);
+    if (blockCanBeHere(shiftedBlock)) {
+      updateBlock();
+      return;
+    }
+    shiftBlockLeft(shiftedBlock);
     if (blockCanBeHere(shiftedBlock)) {
       updateBlock();
       return;
