@@ -1,126 +1,29 @@
-import { useDispatch } from 'react-redux';
-
-import useCanMoveBlock from './use-can-move-block';
-import { dead, empty, gameBoardActions, inProgress, live, settled } from '../store/game-board';
-
-import { squaresRef, statusRef } from '../components/GameBoard';
+import useGameIsInProgress from './use-game-is-in-progress';
+import useMoveBlockDown from './use-move-block-down';
+import useMoveBlockLeft from './use-move-block-left';
+import useMoveBlockRight from './use-move-block-right';
 
 const useMoveBlock = () => {
-  const dispatch = useDispatch();
-  const canMove = useCanMoveBlock();
-
-  const down = () => {
-    if (statusRef.current === inProgress) {
-      dispatch(gameBoardActions.stopTimer());
-
-      let existingObject = JSON.parse(JSON.stringify(squaresRef.current));
-      let newObject = JSON.parse(JSON.stringify(existingObject));
-
-      if (canMove('down')) {
-        Object.keys(existingObject)
-          .reverse()
-          .forEach(outerKey =>
-            Object.keys(existingObject[outerKey]).forEach(innerKey => {
-              if (existingObject[outerKey][innerKey].status === live) {
-                newObject[outerKey][innerKey] = {
-                  status: outerKey === '0' ? dead : empty,
-                  color: '',
-                };
-
-                newObject[parseInt(outerKey) + 1][innerKey] = {
-                  status: 'live',
-                  color: existingObject[outerKey][innerKey].color,
-                };
-              }
-            })
-          );
-
-        dispatch(gameBoardActions.updateGameBoard(newObject));
-      } else {
-        Object.keys(existingObject)
-          .reverse()
-          .forEach(outerKey =>
-            Object.keys(existingObject[outerKey]).forEach(innerKey => {
-              if (existingObject[outerKey][innerKey].status === live) {
-                newObject[outerKey][innerKey] = {
-                  status: settled,
-                  color: existingObject[outerKey][innerKey].color,
-                };
-              }
-            })
-          );
-
-        dispatch(gameBoardActions.updateGameBoard(newObject));
-        // TODO - Clear any complete lines, move above blocks down
-        dispatch(gameBoardActions.nextBlock());
-      }
-      dispatch(gameBoardActions.startTimer());
-    }
-  };
-
-  const left = () => {
-    if (!canMove('left')) return;
-
-    let existingObject = JSON.parse(JSON.stringify(squaresRef.current));
-    let newObject = JSON.parse(JSON.stringify(existingObject));
-
-    Object.keys(existingObject).forEach(outerKey =>
-      Object.keys(existingObject[outerKey]).forEach(innerKey => {
-        if (existingObject[outerKey][innerKey].status === live) {
-          newObject[outerKey][innerKey] = {
-            status: outerKey === '0' ? dead : empty,
-            color: '',
-          };
-          newObject[outerKey][parseInt(innerKey) - 1] = {
-            status: 'live',
-            color: existingObject[outerKey][innerKey].color,
-          };
-        }
-      })
-    );
-
-    dispatch(gameBoardActions.updateGameBoard(newObject));
-  };
-
-  const right = () => {
-    if (!canMove('right')) return;
-
-    let existingObject = JSON.parse(JSON.stringify(squaresRef.current));
-    let newObject = JSON.parse(JSON.stringify(existingObject));
-
-    Object.keys(existingObject).forEach(outerKey =>
-      Object.keys(existingObject[outerKey])
-        .reverse()
-        .forEach(innerKey => {
-          if (existingObject[outerKey][innerKey].status === live) {
-            newObject[outerKey][innerKey] = {
-              status: outerKey === '0' ? dead : empty,
-              color: '',
-            };
-            newObject[outerKey][parseInt(innerKey) + 1] = {
-              status: 'live',
-              color: existingObject[outerKey][innerKey].color,
-            };
-          }
-        })
-    );
-
-    dispatch(gameBoardActions.updateGameBoard(newObject));
-  };
+  const gameIsInProgress = useGameIsInProgress();
+  const moveBlockDown = useMoveBlockDown();
+  const moveBlockLeft = useMoveBlockLeft();
+  const moveBlockRight = useMoveBlockRight();
 
   const moveBlock = direction => {
+    if (!gameIsInProgress()) return;
+
     switch (direction) {
       case 'down':
-        down();
+        moveBlockDown();
         break;
       case 'left':
-        left();
+        moveBlockLeft();
         break;
       case 'right':
-        right();
+        moveBlockRight();
         break;
       default:
-        return;
+        throw new Error('Incorrect direction passed to useMoveBlock');
     }
   };
 
