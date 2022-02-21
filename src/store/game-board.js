@@ -18,6 +18,9 @@ export const sBlock = 's-block';
 export const tBlock = 't-block';
 export const zBlock = 'z-block';
 
+export const clockwise = 'clockwise';
+export const antiClockwise = 'anti-clockwise';
+
 // prettier-ignore
 const initialSquares = () => {
   const returnObject = Array.from(new Array(20), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = { status: empty, block: '' }, acc), {}), acc),{})
@@ -196,7 +199,7 @@ const gameBoardSlice = createSlice({
   reducers: {
     nextBlock(state) {
       // let newBlock = blocks[Math.floor(Math.random() * blocks.length)];
-      let newBlock = 'S'; // TODO - Change this back again
+      let newBlock = 'T'; // TODO - Change this back again
 
       state.liveBlock = newBlock;
       if ((state.blockCounter + 1) % 10 === 0) state.speed = state.speed * 0.75;

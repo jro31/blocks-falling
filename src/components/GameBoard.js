@@ -1,7 +1,15 @@
 import { Fragment, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { gameBoardActions, gameOver, inProgress, paused, preGame } from '../store/game-board';
+import {
+  antiClockwise,
+  clockwise,
+  gameBoardActions,
+  gameOver,
+  inProgress,
+  paused,
+  preGame,
+} from '../store/game-board';
 import useMoveBlock from '../hooks/use-move-block';
 import useRotateBlock from '../hooks/use-rotate-block';
 
@@ -57,11 +65,11 @@ const GameBoard = () => {
   };
 
   const rotateAntiClockwise = () => {
-    rotateBlock('anti-clockwise');
+    rotateBlock(antiClockwise);
   };
 
   const rotateClockwise = () => {
-    rotateBlock('clockwise');
+    rotateBlock(clockwise);
   };
 
   const handleKeyPress = event => {
