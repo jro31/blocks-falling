@@ -10,21 +10,27 @@ export const dead = 'dead';
 export const settled = 'settled';
 export const empty = 'empty';
 
-export const iColor = 'red';
+export const iBlock = 'i-block';
+export const jBlock = 'j-block';
+export const lBlock = 'l-block';
+export const oBlock = 'o-block';
+export const sBlock = 's-block';
+export const tBlock = 't-block';
+export const zBlock = 'z-block';
 
 // prettier-ignore
 const initialSquares = () => {
-  const returnObject = Array.from(new Array(20), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = { status: empty, color: '' }, acc), {}), acc),{})
-  returnObject[0] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => ((acc[curr] = { status: dead, color: '' }), acc), {});
+  const returnObject = Array.from(new Array(20), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = { status: empty, block: '' }, acc), {}), acc),{})
+  returnObject[0] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => ((acc[curr] = { status: dead, block: '' }), acc), {});
   return returnObject;
 };
 
 export const blocks = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
 
-const blockObject = color => {
+const blockObject = block => {
   return {
     status: live,
-    color: color,
+    block: block,
   };
 };
 
@@ -50,7 +56,7 @@ const newBlockShape = block => {
 };
 
 const newBlockI = () => {
-  const blockI = blockObject(iColor);
+  const blockI = blockObject(iBlock);
 
   return {
     1: {
@@ -63,7 +69,7 @@ const newBlockI = () => {
 };
 
 const newBlockJ = () => {
-  const blockJ = blockObject('gold');
+  const blockJ = blockObject(jBlock);
 
   return {
     0: {
@@ -78,7 +84,7 @@ const newBlockJ = () => {
 };
 
 const newBlockL = () => {
-  const blockL = blockObject('blue');
+  const blockL = blockObject(lBlock);
 
   return {
     0: {
@@ -93,7 +99,7 @@ const newBlockL = () => {
 };
 
 const newBlockO = () => {
-  const blockO = blockObject('green');
+  const blockO = blockObject(oBlock);
 
   return {
     0: {
@@ -108,7 +114,7 @@ const newBlockO = () => {
 };
 
 const newBlockS = () => {
-  const blockS = blockObject('chocolate');
+  const blockS = blockObject(sBlock);
 
   return {
     0: {
@@ -123,7 +129,7 @@ const newBlockS = () => {
 };
 
 const newBlockT = () => {
-  const blockT = blockObject('orange');
+  const blockT = blockObject(tBlock);
 
   return {
     0: {
@@ -138,7 +144,7 @@ const newBlockT = () => {
 };
 
 const newBlockZ = () => {
-  const blockZ = blockObject('fuchsia');
+  const blockZ = blockObject(zBlock);
 
   return {
     0: {

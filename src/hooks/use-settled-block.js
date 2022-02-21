@@ -13,7 +13,7 @@ const useSettledBlock = () => {
       Object.keys(initialShape[rowKey]).forEach(columnKey => {
         returnBlock[rowKey][columnKey] = {
           status: settled,
-          color: initialShape[rowKey][columnKey].color,
+          block: initialShape[rowKey][columnKey].block,
         };
       });
     });

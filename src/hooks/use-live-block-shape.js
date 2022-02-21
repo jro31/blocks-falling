@@ -11,7 +11,7 @@ const useLiveBlockShape = () => {
           if (!returnObject[outerKey]) returnObject[outerKey] = {};
           if (!returnObject[outerKey][innerKey]) returnObject[outerKey][innerKey] = {};
           returnObject[outerKey][innerKey].status = live;
-          returnObject[outerKey][innerKey].color = squaresRef.current[outerKey][innerKey].color;
+          returnObject[outerKey][innerKey].block = squaresRef.current[outerKey][innerKey].block;
         }
       })
     );

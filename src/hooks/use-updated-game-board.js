@@ -9,7 +9,7 @@ const useUpdatedGameBoard = () => {
     Object.keys(existingObject).forEach(outerKey =>
       Object.keys(existingObject[outerKey]).forEach(innerKey => {
         if (existingObject[outerKey][innerKey].status === live) {
-          newObject[outerKey][innerKey] = { status: outerKey === '0' ? dead : empty, color: '' };
+          newObject[outerKey][innerKey] = { status: outerKey === '0' ? dead : empty, block: '' };
         }
         if (movedBlock[outerKey] && movedBlock[outerKey][innerKey]) {
           newObject[outerKey][innerKey] = { ...movedBlock[outerKey][innerKey] };

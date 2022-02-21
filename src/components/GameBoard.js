@@ -137,7 +137,7 @@ const GameBoard = () => {
             ).map(column => (
               <div
                 key={`square-${row}-${column}`}
-                className={`square ${squares[row][column].status} ${squares[row][column].color}`}
+                className={`square ${squares[row][column].status} ${squares[row][column].block}`}
               />
             ))}
           </div>
