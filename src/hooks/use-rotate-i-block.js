@@ -1,7 +1,7 @@
 import useLiveBlockShape from './use-live-block-shape';
 import useOffsetPosition from './use-offset-position';
 
-import { iColor, live } from '../store/game-board';
+import { iBlock, live } from '../store/game-board';
 
 const useRotateIBlock = () => {
   const liveBlockShape = useLiveBlockShape();
@@ -21,7 +21,7 @@ const useRotateIBlock = () => {
 
       [...Array(4)].forEach((_, index) => {
         returnBlock[firstRow + index] = {};
-        returnBlock[firstRow + index][newColumn] = { status: live, color: iColor };
+        returnBlock[firstRow + index][newColumn] = { status: live, block: iBlock };
       });
     } else {
       const newRow = parseInt(Object.keys(initialShape)[1]);
@@ -30,7 +30,7 @@ const useRotateIBlock = () => {
       returnBlock[newRow] = {};
 
       [...Array(4)].forEach((_, index) => {
-        returnBlock[newRow][firstColumn + index] = { status: live, color: iColor };
+        returnBlock[newRow][firstColumn + index] = { status: live, block: iBlock };
       });
     }
 

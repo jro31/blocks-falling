@@ -26,30 +26,30 @@
 .settled {
 }
 
-.blue {
-  background-color: blue;
+.i-block {
+  background-color: red;
 }
 
-.chocolate {
-  background-color: chocolate;
-}
-
-.fuchsia {
-  background-color: fuchsia;
-}
-
-.gold {
+.j-block {
   background-color: gold;
 }
 
-.green {
+.l-block {
+  background-color: blue;
+}
+
+.o-block {
   background-color: green;
 }
 
-.orange {
+.s-block {
+  background-color: chocolate;
+}
+
+.t-block {
   background-color: orange;
 }
 
-.red {
-  background-color: red;
+.z-block {
+  background-color: fuchsia;
 }
