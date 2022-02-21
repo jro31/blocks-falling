@@ -13,6 +13,8 @@ const useRotateIBlock = () => {
     const initialShape = liveBlockShape();
 
     returnBlock = {};
+    const iSquare = { status: live, block: iBlock };
+
     const position = () => (Object.keys(initialShape).length === 1 ? 'horizontal' : 'vertical');
 
     if (position() === 'horizontal') {
@@ -21,7 +23,7 @@ const useRotateIBlock = () => {
 
       [...Array(4)].forEach((_, index) => {
         returnBlock[firstRow + index] = {};
-        returnBlock[firstRow + index][newColumn] = { status: live, block: iBlock };
+        returnBlock[firstRow + index][newColumn] = iSquare;
       });
     } else {
       const newRow = parseInt(Object.keys(initialShape)[1]);
@@ -30,7 +32,7 @@ const useRotateIBlock = () => {
       returnBlock[newRow] = {};
 
       [...Array(4)].forEach((_, index) => {
-        returnBlock[newRow][firstColumn + index] = { status: live, block: iBlock };
+        returnBlock[newRow][firstColumn + index] = iSquare;
       });
     }
 
