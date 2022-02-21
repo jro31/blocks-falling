@@ -1,9 +1,9 @@
-import useRowKeyIntegers from './use-row-key-integers';
+import useBlockTopRowKey from './use-block-top-row-key';
 
 const useRowIsAboveGameBoard = () => {
-  const rowKeyIntegers = useRowKeyIntegers();
+  const blockTopRowKey = useBlockTopRowKey();
 
-  const rowIsAboveGameBoard = block => rowKeyIntegers(block).some(rowKey => rowKey < 1);
+  const rowIsAboveGameBoard = block => blockTopRowKey(block) < 1;
 
   return rowIsAboveGameBoard;
 };

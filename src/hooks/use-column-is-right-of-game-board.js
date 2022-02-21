@@ -1,10 +1,9 @@
-import useColumnKeyIntegers from './use-column-key-integers';
+import useBlockLastColumnKey from './use-block-last-column-key';
 
 const useColumnIsRightOfGameBoard = () => {
-  const columnKeyIntegers = useColumnKeyIntegers();
+  const blockLastColumnKey = useBlockLastColumnKey();
 
-  const columnIsRightOfGameBoard = block =>
-    columnKeyIntegers(block).some(columnKey => columnKey > 10);
+  const columnIsRightOfGameBoard = block => blockLastColumnKey(block) > 10;
 
   return columnIsRightOfGameBoard;
 };

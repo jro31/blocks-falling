@@ -1,17 +1,16 @@
 import useColumnIsRightOfGameBoard from './use-column-is-right-of-game-board';
-import useColumnKeyIntegers from './use-column-key-integers';
+import useBlockLastColumnKey from './use-block-last-column-key';
 import useShiftBlockLeft from './use-shift-block-left';
 
 const useOffsetForRightOfGameBoard = () => {
   const columnIsRightOfGameBoard = useColumnIsRightOfGameBoard();
-  const columnKeyIntegers = useColumnKeyIntegers();
+  const blockLastColumnKey = useBlockLastColumnKey();
   const shiftBlockLeft = useShiftBlockLeft();
 
   const offsetForRightOfGameBoard = block => {
     if (!columnIsRightOfGameBoard(block)) return;
 
-    const rightestColumn = Math.max(...columnKeyIntegers(block));
-    const amountToShift = rightestColumn - 10;
+    const amountToShift = blockLastColumnKey(block) - 10;
 
     shiftBlockLeft(block, amountToShift);
   };

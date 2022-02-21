@@ -1,9 +1,9 @@
-import useRowKeyIntegers from './use-row-key-integers';
+import useBlockBottomRowKey from './use-block-bottom-row-key';
 
 const useRowIsBeneathGameBoard = () => {
-  const rowKeyIntegers = useRowKeyIntegers();
+  const blockBottomRowKey = useBlockBottomRowKey();
 
-  const rowIsBeneathGameBoard = block => rowKeyIntegers(block).some(rowKey => rowKey > 20);
+  const rowIsBeneathGameBoard = block => blockBottomRowKey(block) > 20;
 
   return rowIsBeneathGameBoard;
 };
