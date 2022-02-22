@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import GameBoard from './components/GameBoard';
 
 import { gameBoardActions } from './store/game-board';
 
@@ -10,7 +11,7 @@ const App = () => {
     dispatch(gameBoardActions.testReducer());
   };
 
-  return <div onClick={testClickHandler}>{GameBoardStatus}</div>;
+  return <GameBoard />;
 };
 
 export default App;

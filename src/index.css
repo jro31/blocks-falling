@@ -1,0 +1,55 @@
+.gameboard-container {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+}
+
+.square {
+  box-sizing: border-box;
+  flex-grow: 1;
+  border: 1px solid white;
+  height: 25px;
+}
+
+.empty {
+  background-color: black;
+}
+
+.live {
+}
+
+.settled {
+}
+
+.i-block {
+  background-color: red;
+}
+
+.j-block {
+  background-color: gold;
+}
+
+.l-block {
+  background-color: blue;
+}
+
+.o-block {
+  background-color: green;
+}
+
+.s-block {
+  background-color: chocolate;
+}
+
+.t-block {
+  background-color: orange;
+}
+
+.z-block {
+  background-color: fuchsia;
+}
