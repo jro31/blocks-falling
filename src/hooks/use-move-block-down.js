@@ -5,6 +5,7 @@ import useCanMoveBlock from './use-can-move-block';
 import useLiveBlockShape from './use-live-block-shape';
 import useUpdatedGameBoard from './use-updated-game-board';
 import useSettledBlock from './use-settled-block';
+import useCompletedRows from './use-completed-rows';
 
 const useMoveBlockDown = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const useMoveBlockDown = () => {
   const liveBlockShape = useLiveBlockShape();
   const updatedGameBoard = useUpdatedGameBoard();
   const settledBlock = useSettledBlock();
+  const completedRows = useCompletedRows();
 
   const moveBlockDown = () => {
     dispatch(gameBoardActions.stopTimer());
@@ -31,6 +33,7 @@ const useMoveBlockDown = () => {
     } else {
       dispatch(gameBoardActions.updateGameBoard(updatedGameBoard(settledBlock())));
       // TODO - Clear any complete lines, move above blocks down
+      console.log(completedRows());
       dispatch(gameBoardActions.nextBlock());
     }
     dispatch(gameBoardActions.startTimer());
