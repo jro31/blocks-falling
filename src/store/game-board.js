@@ -199,7 +199,7 @@ const gameBoardSlice = createSlice({
   reducers: {
     nextBlock(state) {
       // let newBlock = blocks[Math.floor(Math.random() * blocks.length)];
-      let newBlock = 'T'; // TODO - Change this back again
+      let newBlock = 'J'; // TODO - Change this back again
 
       state.liveBlock = newBlock;
       if ((state.blockCounter + 1) % 10 === 0) state.speed = state.speed * 0.75;
