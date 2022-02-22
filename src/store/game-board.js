@@ -203,6 +203,7 @@ const initialState = {
   blockCounter: 0,
   timer: { isLive: true },
   status: preGame,
+  clearedRows: 0,
 };
 
 const gameBoardSlice = createSlice({
@@ -225,6 +226,9 @@ const gameBoardSlice = createSlice({
     },
     updateGameBoard(state, action) {
       state.squares = action.payload;
+    },
+    updateClearedRows(state, action) {
+      state.clearedRows = state.clearedRows + action.payload;
     },
     startTimer(state) {
       state.timer = { isLive: true };

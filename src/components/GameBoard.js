@@ -24,6 +24,7 @@ const GameBoard = () => {
   const speed = useSelector(state => state.gameBoard.speed);
   const timer = useSelector(state => state.gameBoard.timer);
   const status = useSelector(state => state.gameBoard.status);
+  const clearedRows = useSelector(state => state.gameBoard.clearedRows);
   const liveBlock = useSelector(state => state.gameBoard.liveBlock);
   squaresRef = useRef(squares);
   squaresRef.current = squares;
@@ -151,7 +152,9 @@ const GameBoard = () => {
           </div>
         ))}
       </div>
-      <h1>{status}</h1>
+      <h1>
+        {clearedRows} {status}
+      </h1>
     </Fragment>
   );
 };

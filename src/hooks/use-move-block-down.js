@@ -6,6 +6,7 @@ import useLiveBlockShape from './use-live-block-shape';
 import useUpdatedGameBoard from './use-updated-game-board';
 import useSettledBlock from './use-settled-block';
 import useIsCompletedRows from './use-is-completed-rows';
+import useNumberOfCompletedRows from './use-number-of-completed-rows';
 import useClearCompletedRows from './use-clear-completed-rows';
 
 const useMoveBlockDown = () => {
@@ -15,6 +16,7 @@ const useMoveBlockDown = () => {
   const updatedGameBoard = useUpdatedGameBoard();
   const settledBlock = useSettledBlock();
   const isCompletedRows = useIsCompletedRows();
+  const numberOfCompletedRows = useNumberOfCompletedRows();
   const clearCompletedRows = useClearCompletedRows();
 
   const moveBlockDown = () => {
@@ -34,7 +36,10 @@ const useMoveBlockDown = () => {
       dispatch(gameBoardActions.updateGameBoard(updatedGameBoard(movedBlock)));
     } else {
       dispatch(gameBoardActions.updateGameBoard(updatedGameBoard(settledBlock())));
-      if (isCompletedRows()) dispatch(gameBoardActions.updateGameBoard(clearCompletedRows()));
+      if (isCompletedRows()) {
+        dispatch(gameBoardActions.updateClearedRows(numberOfCompletedRows()));
+        dispatch(gameBoardActions.updateGameBoard(clearCompletedRows()));
+      }
       dispatch(gameBoardActions.nextBlock());
     }
     dispatch(gameBoardActions.startTimer());
