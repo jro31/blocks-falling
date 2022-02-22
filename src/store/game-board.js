@@ -214,7 +214,6 @@ const gameBoardSlice = createSlice({
       let newBlock = blocks[Math.floor(Math.random() * blocks.length)];
 
       state.liveBlock = newBlock;
-      if ((state.blockCounter + 1) % 10 === 0) state.speed = state.speed * 0.75;
       state.blockCounter = state.blockCounter + 1;
 
       if (canAddBlock(newBlockShape(newBlock), current(state.squares))) {
@@ -229,6 +228,7 @@ const gameBoardSlice = createSlice({
     },
     updateClearedRows(state, action) {
       state.clearedRows = state.clearedRows + action.payload;
+      state.speed = Math.max(initialState.speed - state.clearedRows * 25, 100);
     },
     startTimer(state) {
       state.timer = { isLive: true };
