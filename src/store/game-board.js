@@ -21,10 +21,22 @@ export const zBlock = 'z-block';
 export const clockwise = 'clockwise';
 export const antiClockwise = 'anti-clockwise';
 
-// prettier-ignore
+export const deadRow = Array.from(new Array(10), (_, i) => i + 1).reduce(
+  (acc, curr) => ((acc[curr] = { status: dead, block: '' }), acc),
+  {}
+);
+
+export const emptyRow = Array.from(new Array(10), (_, i) => i + 1).reduce(
+  (acc, curr) => ((acc[curr] = { status: empty, block: '' }), acc),
+  {}
+);
+
 const initialSquares = () => {
-  const returnObject = Array.from(new Array(20), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => (acc[curr] = { status: empty, block: '' }, acc), {}), acc),{})
-  returnObject[0] = Array.from(new Array(10), (_, i) => i + 1).reduce((acc, curr) => ((acc[curr] = { status: dead, block: '' }), acc), {});
+  const returnObject = Array.from(new Array(20), (_, i) => i + 1).reduce(
+    (acc, curr) => ((acc[curr] = emptyRow), acc),
+    {}
+  );
+  returnObject[0] = deadRow;
   return returnObject;
 };
 
