@@ -1,0 +1,11 @@
+.right-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top-score-pause-container {
+}
+
+.buttons-container {
+}

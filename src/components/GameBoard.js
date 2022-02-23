@@ -156,9 +156,6 @@ const GameBoard = () => {
           </div>
         ))}
       </div>
-      {/* <h1>
-        {clearedRows} {status}
-      </h1> */}
     </Fragment>
   );
 };

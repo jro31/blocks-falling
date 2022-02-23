@@ -1,8 +1,8 @@
-import LeftSidebar from './components/LeftSidebar';
-import MobileScoreBoard from './components/MobileScoreBoard';
+import LeftSidebar from './components/layout/big-screen/LeftSidebar';
+import MobileScoreBoard from './components/layout/mobile/MobileScoreBoard';
 import GameBoard from './components/GameBoard';
-import MobileButtons from './components/MobileButtons';
-import RightSidebar from './components/RightSidebar';
+import MobileButtons from './components/layout/mobile/MobileButtons';
+import RightSidebar from './components/layout/big-screen/RightSidebar';
 
 const App = () => {
   return (

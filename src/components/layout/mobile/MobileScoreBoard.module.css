@@ -13,17 +13,8 @@
   }
 }
 
-.rows-score {
-}
-
 .top-score-pause-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.top-score {
-}
-
-.pause-button {
 }

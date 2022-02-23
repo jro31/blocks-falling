@@ -3,7 +3,7 @@
   --buttons-container-height: 50px;
   --rows: 21;
   --columns: 10;
-  --sidebar-width: 75px;
+  --sidebar-min-width: 75px;
   --gameboard-width: min(
     calc(
       (100vh - (var(--scoreboard-height) + var(--buttons-container-height))) /
@@ -17,8 +17,9 @@
   :root {
     --gameboard-width: min(
       calc(100vh / (var(--rows) / var(--columns))),
-      calc(100vw - (var(--sidebar-width) * 2))
+      calc(100vw - (var(--sidebar-min-width) * 2))
     );
+    --sidebar-width: calc((100vw - var(--gameboard-width)) / 2);
   }
 }
 
@@ -37,9 +38,17 @@ body {
   flex-direction: column;
 }
 
+@media (min-width: 640px) {
+  .game-container {
+    flex-direction: row;
+  }
+}
+
 .sidebar {
   display: none;
+  min-width: var(--sidebar-min-width);
   width: var(--sidebar-width);
+  box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
