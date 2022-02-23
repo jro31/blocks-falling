@@ -1,0 +1,29 @@
+/* @import '../index.css'; */
+
+.mobile-scoreboard {
+  height: var(--scoreboard-height);
+  width: var(--gameboard-width);
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .mobile-scoreboard {
+    display: none;
+  }
+}
+
+.rows-score {
+}
+
+.top-score-pause-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top-score {
+}
+
+.pause-button {
+}

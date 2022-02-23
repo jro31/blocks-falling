@@ -1,14 +1,18 @@
-import ScoreBoard from './components/ScoreBoard';
+import LeftSidebar from './components/LeftSidebar';
+import MobileScoreBoard from './components/MobileScoreBoard';
 import GameBoard from './components/GameBoard';
-import Buttons from './components/Buttons';
+import MobileButtons from './components/MobileButtons';
+import RightSidebar from './components/RightSidebar';
 
 const App = () => {
   return (
     <div className='page-container'>
       <div className='game-container'>
-        <ScoreBoard />
+        <LeftSidebar />
+        <MobileScoreBoard />
         <GameBoard />
-        <Buttons />
+        <MobileButtons />
+        <RightSidebar />
       </div>
     </div>
   );

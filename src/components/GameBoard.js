@@ -13,6 +13,8 @@ import {
 import useMoveBlock from '../hooks/use-move-block';
 import useRotateBlock from '../hooks/use-rotate-block';
 
+import styles from './Gameboard.module.css';
+
 let timeOut;
 export let squaresRef;
 export let statusRef;
@@ -137,16 +139,18 @@ const GameBoard = () => {
 
   return (
     <Fragment>
-      <div className='gameboard'>
+      <div className={styles.gameboard}>
         {Array.from(new Array(Object.keys(squares).length), (_, i) => i).map(row => (
-          <div key={`row-${row}`} className='row'>
+          <div key={`row-${row}`} className={styles.row}>
             {Array.from(
               new Array(Object.keys(squares[Object.keys(squares)[0]]).length),
               (_, i) => i + 1
             ).map(column => (
               <div
                 key={`square-${row}-${column}`}
-                className={`square ${squares[row][column].status} ${squares[row][column].block}`}
+                className={`${styles.square} ${styles[squares[row][column].status]} ${
+                  styles[squares[row][column].block]
+                }`}
               />
             ))}
           </div>
