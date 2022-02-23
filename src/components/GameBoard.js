@@ -137,7 +137,7 @@ const GameBoard = () => {
 
   return (
     <Fragment>
-      <div className='gameboard-container'>
+      <div className='gameboard'>
         {Array.from(new Array(Object.keys(squares).length), (_, i) => i).map(row => (
           <div key={`row-${row}`} className='row'>
             {Array.from(
@@ -152,9 +152,9 @@ const GameBoard = () => {
           </div>
         ))}
       </div>
-      <h1>
+      {/* <h1>
         {clearedRows} {status}
-      </h1>
+      </h1> */}
     </Fragment>
   );
 };

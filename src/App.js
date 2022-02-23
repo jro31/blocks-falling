@@ -1,17 +1,17 @@
-import { useDispatch, useSelector } from 'react-redux';
+import ScoreBoard from './components/ScoreBoard';
 import GameBoard from './components/GameBoard';
-
-import { gameBoardActions } from './store/game-board';
+import Buttons from './components/Buttons';
 
 const App = () => {
-  const dispatch = useDispatch();
-  const GameBoardStatus = useSelector(state => state.gameBoard.gameBoardStatus);
-
-  const testClickHandler = () => {
-    dispatch(gameBoardActions.testReducer());
-  };
-
-  return <GameBoard />;
+  return (
+    <div className='page-container'>
+      <div className='game-container'>
+        <ScoreBoard />
+        <GameBoard />
+        <Buttons />
+      </div>
+    </div>
+  );
 };
 
 export default App;

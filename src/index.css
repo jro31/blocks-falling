@@ -1,5 +1,63 @@
-.gameboard-container {
-  width: 250px;
+:root {
+  --scoreboard-height: 50px;
+  --buttons-container-height: 50px;
+  --rows: 21;
+  --columns: 10;
+  --gameboard-width: min(
+    calc(
+      (100vh - (var(--scoreboard-height) + var(--buttons-container-height))) /
+        (var(--rows) / var(--columns))
+    ),
+    100vw
+  );
+}
+
+@media (orientation: portrait) {
+  @media (min-width: 640px) {
+    :root {
+      /* --gameboard-width: 100vw; */
+    }
+  }
+}
+
+body {
+  margin: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-container {
+  width: var(--gameboard-width);
+}
+
+.scoreboard {
+  height: var(--scoreboard-height);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.rows-score {
+}
+
+.top-score-pause-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top-score {
+}
+
+.pause-button {
+}
+
+.gameboard {
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -13,7 +71,7 @@
   box-sizing: border-box;
   flex-grow: 1;
   border: 1px solid white;
-  height: 25px;
+  height: calc(var(--gameboard-width) / 10);
 }
 
 .empty {
@@ -52,4 +110,9 @@
 
 .z-block {
   background-color: fuchsia;
+}
+
+.buttons-container {
+  height: var(--buttons-container-height);
+  width: 100%;
 }
