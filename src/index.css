@@ -27,23 +27,6 @@ body {
   margin: 0;
 }
 
-.page-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.game-container {
-  display: flex;
-  flex-direction: column;
-}
-
-@media (min-width: 640px) {
-  .game-container {
-    flex-direction: row;
-  }
-}
-
 .sidebar {
   display: none;
   min-width: var(--sidebar-min-width);
@@ -53,6 +36,6 @@ body {
 
 @media (min-width: 640px) {
   .sidebar {
-    display: block;
+    display: flex;
   }
 }

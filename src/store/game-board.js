@@ -42,6 +42,22 @@ const initialSquares = () => {
 
 export const blocks = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
 
+const backgrounds = [
+  'superman',
+  'orange-coral',
+  'deep-sea',
+  'sunrise',
+  'fresh-air',
+  'cherry-blossom',
+  'mango',
+  'red-dead',
+  'chlorophyll',
+  'wild-hunt',
+  'spectrum',
+  'not-dead-red',
+  'sand-to-sea',
+];
+
 const blockObject = block => {
   return {
     status: live,
@@ -204,6 +220,7 @@ const initialState = {
   timer: { isLive: true },
   status: preGame,
   clearedRows: 0,
+  background: backgrounds[Math.floor(Math.random() * backgrounds.length)],
 };
 
 const gameBoardSlice = createSlice({
@@ -215,6 +232,9 @@ const gameBoardSlice = createSlice({
 
       state.liveBlock = newBlock;
       state.blockCounter = state.blockCounter + 1;
+
+      if ((state.blockCounter + 1) % 5 === 0)
+        state.background = backgrounds[Math.floor(Math.random() * backgrounds.length)];
 
       if (canAddBlock(newBlockShape(newBlock), current(state.squares))) {
         state.squares = mergeNestedObjects(current(state.squares), newBlockShape(newBlock));
