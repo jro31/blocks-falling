@@ -9,10 +9,18 @@ import RightSidebar from './components/layout/big-screen/RightSidebar';
 import styles from './App.module.css';
 
 const App = () => {
-  const background = useSelector(state => state.gameBoard.background);
+  const backgroundOne = useSelector(state => state.gameBoard.backgroundOne);
+  const backgroundTwo = useSelector(state => state.gameBoard.backgroundTwo);
+  const liveBackground = useSelector(state => state.gameBoard.liveBackground);
+
+  const backgroundClasses = () => {
+    return `${
+      liveBackground === 'one' ? styles['before-is-hidden'] : styles['before-is-visible']
+    } ${styles[backgroundOne]} ${styles[`${backgroundTwo}-before`]}`;
+  };
 
   return (
-    <div className={`${styles['page-container']} ${styles[background]}`}>
+    <div className={`${styles['page-container']} ${backgroundClasses()}`}>
       <div className={styles['game-container']}>
         <LeftSidebar />
         <MobileScoreBoard />

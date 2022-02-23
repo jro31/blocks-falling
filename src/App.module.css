@@ -2,25 +2,51 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  z-index: 0;
 }
 
-.superman {
+.page-container::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  transition: opacity 10s;
+}
+
+.before-is-visible::before {
+  opacity: 1;
+}
+
+.before-is-hidden::before {
+  opacity: 0;
+}
+
+.superman,
+.superman-before::before {
   background-image: linear-gradient(to right, #0099f7, #f11712);
 }
 
-.orange-coral {
+.orange-coral,
+.orange-coral-before::before {
   background-image: linear-gradient(to right, #ff9966, #ff5e62);
 }
 
-.deep-sea {
+.deep-sea,
+.deep-sea-before::before {
   background-image: linear-gradient(to right, #2c3e50, #4ca1af);
 }
 
-.sunrise {
+.sunrise,
+.sunrise-before::before {
   background-image: linear-gradient(to right, #ff512f, #f09819);
 }
 
-.fresh-air {
+.fresh-air,
+.fresh-air-before::before {
   background-image: linear-gradient(
     95.2deg,
     rgba(173, 252, 234, 1) 26.8%,
@@ -28,19 +54,23 @@
   );
 }
 
-.cherry-blossom {
+.cherry-blossom,
+.cherry-blossom-before::before {
   background-image: linear-gradient(25deg, #d64c7f, #ee4758 50%);
 }
 
-.mango {
+.mango,
+.mango-before::before {
   background-image: radial-gradient(circle farthest-side, #fceabb, #f8b500);
 }
 
-.red-dead {
+.red-dead,
+.red-dead-before::before {
   background-image: linear-gradient(to right, #870000, #190a05);
 }
 
-.chlorophyll {
+.chlorophyll,
+.chlorophyll-before::before {
   background-image: radial-gradient(
     circle 759px at -6.7% 50%,
     rgba(80, 131, 73, 1) 0%,
@@ -51,25 +81,30 @@
   );
 }
 
-.wild-hunt {
+.wild-hunt,
+.wild-hunt-before::before {
   background-image: linear-gradient(to right, #434343 0%, black 100%);
 }
 
-.spectrum {
+.spectrum,
+.spectrum-before::before {
   background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
 }
 
-.not-dead-red {
+.not-dead-red,
+.not-dead-red-before::before {
   background-image: linear-gradient(to right, #fffbd5, #b20a2c);
 }
 
-.sand-to-sea {
+.sand-to-sea,
+.sand-to-sea-before::before {
   background-image: linear-gradient(to right, #decba4, #3e5151);
 }
 
 .game-container {
   display: flex;
   flex-direction: column;
+  z-index: 2;
 }
 
 @media (min-width: 640px) {

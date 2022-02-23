@@ -220,7 +220,9 @@ const initialState = {
   timer: { isLive: true },
   status: preGame,
   clearedRows: 0,
-  background: backgrounds[Math.floor(Math.random() * backgrounds.length)],
+  backgroundOne: backgrounds[Math.floor(Math.random() * backgrounds.length)],
+  backgroundTwo: backgrounds[Math.floor(Math.random() * backgrounds.length)],
+  liveBackground: 'one',
 };
 
 const gameBoardSlice = createSlice({
@@ -233,8 +235,15 @@ const gameBoardSlice = createSlice({
       state.liveBlock = newBlock;
       state.blockCounter = state.blockCounter + 1;
 
-      if ((state.blockCounter + 1) % 5 === 0)
-        state.background = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+      if (state.blockCounter % 5 === 0) {
+        if (state.liveBackground === 'one') {
+          state.liveBackground = 'two';
+          state.backgroundTwo = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+        } else {
+          state.liveBackground = 'one';
+          state.backgroundOne = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+        }
+      }
 
       if (canAddBlock(newBlockShape(newBlock), current(state.squares))) {
         state.squares = mergeNestedObjects(current(state.squares), newBlockShape(newBlock));
