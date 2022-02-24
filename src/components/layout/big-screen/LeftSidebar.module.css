@@ -8,4 +8,5 @@
 }
 
 .buttons-container {
+  align-self: flex-start;
 }

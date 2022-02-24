@@ -7,4 +7,5 @@
 }
 
 .buttons-container {
+  align-self: flex-end;
 }
