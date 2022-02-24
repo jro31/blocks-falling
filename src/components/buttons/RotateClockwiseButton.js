@@ -1,11 +1,15 @@
 import RoundButton from './RoundButton';
+import useRotateBlock from '../../hooks/use-rotate-block';
+import { clockwise } from '../../store/game-board';
 
 const RotateClockwiseButton = () => {
-  return '';
-  // TODO
-  // <RoundButton onClick={() => moveBlock('left')}>
-  //   <img src='/icons/left-arrow.svg' alt='L' />
-  // </RoundButton>
+  const rotateBlock = useRotateBlock();
+
+  return (
+    <RoundButton onClick={() => rotateBlock(clockwise)}>
+      <img src='/icons/rotate-clockwise-arrow.svg' alt='X' />
+    </RoundButton>
+  );
 };
 
 export default RotateClockwiseButton;

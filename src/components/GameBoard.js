@@ -42,62 +42,30 @@ const GameBoard = () => {
 
   const startGame = () => {
     dispatch(gameBoardActions.startGame());
-    newBlock();
-  };
-
-  const pauseGame = () => {
-    dispatch(gameBoardActions.pauseGame());
-  };
-
-  const resumeGame = () => {
-    dispatch(gameBoardActions.resumeGame());
-  };
-
-  const newBlock = () => {
     dispatch(gameBoardActions.nextBlock());
-  };
-
-  const moveBlockDown = () => {
-    moveBlock(down);
-  };
-
-  const moveBlockLeft = () => {
-    moveBlock(left);
-  };
-
-  const moveBlockRight = () => {
-    moveBlock(right);
-  };
-
-  const rotateAntiClockwise = () => {
-    rotateBlock(antiClockwise);
-  };
-
-  const rotateClockwise = () => {
-    rotateBlock(clockwise);
   };
 
   const handleKeyPress = event => {
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
-        moveBlockDown();
+        moveBlock(down);
         break;
       case 'ArrowLeft':
         event.preventDefault();
-        moveBlockLeft();
+        moveBlock(left);
         break;
       case 'ArrowRight':
         event.preventDefault();
-        moveBlockRight();
+        moveBlock(right);
         break;
       case 'z':
         event.preventDefault();
-        rotateAntiClockwise();
+        rotateBlock(antiClockwise);
         break;
       case 'x':
         event.preventDefault();
-        rotateClockwise();
+        rotateBlock(clockwise);
         break;
       case ' ':
         event.preventDefault();
@@ -107,9 +75,9 @@ const GameBoard = () => {
           dispatch(gameBoardActions.resetGame());
           startGame();
         } else if (statusRef.current === inProgress) {
-          pauseGame();
+          dispatch(gameBoardActions.pauseGame());
         } else if (statusRef.current === paused) {
-          resumeGame();
+          dispatch(gameBoardActions.resumeGame());
         }
         break;
       default:
@@ -129,7 +97,7 @@ const GameBoard = () => {
     if (status === inProgress) {
       if (timer.isLive) {
         timeOut = setTimeout(() => {
-          moveBlockDown();
+          moveBlock(down);
         }, speed);
       }
     }

@@ -1,4 +1,5 @@
 import MoveRightButton from '../../buttons/MoveRightButton';
+import RotateClockwiseButton from '../../buttons/RotateClockwiseButton';
 import styles from './RightSidebar.module.css';
 
 const RightSidebar = () => {
@@ -9,6 +10,7 @@ const RightSidebar = () => {
         <div>Pause button</div>
       </div>
       <div className={styles['buttons-container']}>
+        <RotateClockwiseButton />
         <MoveRightButton />
       </div>
     </div>
