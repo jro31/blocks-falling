@@ -1,2 +1,13 @@
 .pause-button {
+  border-radius: 5%;
+  background-color: blue;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pause-button > img {
+  width: 40px;
+  height: 40px;
 }

@@ -15,6 +15,7 @@ import {
 } from '../store/game-board';
 import useMoveBlock from '../hooks/use-move-block';
 import useRotateBlock from '../hooks/use-rotate-block';
+import useBeginGame from '../hooks/use-begin-game';
 
 import styles from './Gameboard.module.css';
 
@@ -39,11 +40,7 @@ const GameBoard = () => {
 
   const moveBlock = useMoveBlock();
   const rotateBlock = useRotateBlock();
-
-  const startGame = () => {
-    dispatch(gameBoardActions.startGame());
-    dispatch(gameBoardActions.nextBlock());
-  };
+  const beginGame = useBeginGame();
 
   const handleKeyPress = event => {
     switch (event.key) {
@@ -69,11 +66,8 @@ const GameBoard = () => {
         break;
       case ' ':
         event.preventDefault();
-        if (statusRef.current === preGame) {
-          startGame();
-        } else if (statusRef.current === gameOver) {
-          dispatch(gameBoardActions.resetGame());
-          startGame();
+        if (statusRef.current === preGame || statusRef.current === gameOver) {
+          beginGame();
         } else if (statusRef.current === inProgress) {
           dispatch(gameBoardActions.pauseGame());
         } else if (statusRef.current === paused) {
