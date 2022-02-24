@@ -18,6 +18,9 @@ export const sBlock = 's-block';
 export const tBlock = 't-block';
 export const zBlock = 'z-block';
 
+export const left = 'left';
+export const right = 'right';
+export const down = 'down';
 export const clockwise = 'clockwise';
 export const antiClockwise = 'anti-clockwise';
 

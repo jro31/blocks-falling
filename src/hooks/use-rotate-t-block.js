@@ -4,7 +4,7 @@ import useBlockFirstColumnKey from './use-block-first-column-key';
 import useRowKeyIntegers from './use-row-key-integers';
 import useOffsetPosition from './use-offset-position';
 
-import { clockwise, live, tBlock } from '../store/game-board';
+import { clockwise, down, left, live, right, tBlock } from '../store/game-board';
 
 const useRotateTBlock = () => {
   const liveBlockShape = useLiveBlockShape();
@@ -26,13 +26,13 @@ const useRotateTBlock = () => {
 
     const position = () => {
       if (Object.keys(initialShape[topRowKey]).length === 3) {
-        return 'down';
+        return down;
       } else if (rowKeyIntegers(initialShape).length === 2) {
         return 'up';
       } else if (firstColumnKey === parseInt(Object.keys(initialShape[topRowKey])[0])) {
-        return 'right';
+        return right;
       } else {
-        return 'left';
+        return left;
       }
     };
 
@@ -84,7 +84,7 @@ const useRotateTBlock = () => {
       });
     };
 
-    if (position() === 'down') {
+    if (position() === down) {
       direction === clockwise
         ? buildLeftTBlock(topRowKey - 1, firstColumnKey)
         : buildRightTBlock(topRowKey - 1, firstColumnKey + 1);
@@ -92,7 +92,7 @@ const useRotateTBlock = () => {
       direction === clockwise
         ? buildRightTBlock(topRowKey, firstColumnKey + 1)
         : buildLeftTBlock(topRowKey, firstColumnKey);
-    } else if (position() === 'right') {
+    } else if (position() === right) {
       direction === clockwise
         ? buildDownTBlock(topRowKey + 1, firstColumnKey - 1)
         : buildUpTBlock(topRowKey, firstColumnKey - 1);

@@ -1,3 +1,4 @@
+import MoveRightButton from '../../buttons/MoveRightButton';
 import styles from './RightSidebar.module.css';
 
 const RightSidebar = () => {
@@ -7,7 +8,9 @@ const RightSidebar = () => {
         <div>Top score</div>
         <div>Pause button</div>
       </div>
-      <div className={styles['buttons-container']}>Right buttons</div>
+      <div className={styles['buttons-container']}>
+        <MoveRightButton />
+      </div>
     </div>
   );
 };

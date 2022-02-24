@@ -4,11 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   antiClockwise,
   clockwise,
+  down,
   gameBoardActions,
   gameOver,
   inProgress,
+  left,
   paused,
   preGame,
+  right,
 } from '../store/game-board';
 import useMoveBlock from '../hooks/use-move-block';
 import useRotateBlock from '../hooks/use-rotate-block';
@@ -55,15 +58,15 @@ const GameBoard = () => {
   };
 
   const moveBlockDown = () => {
-    moveBlock('down');
+    moveBlock(down);
   };
 
   const moveBlockLeft = () => {
-    moveBlock('left');
+    moveBlock(left);
   };
 
   const moveBlockRight = () => {
-    moveBlock('right');
+    moveBlock(right);
   };
 
   const rotateAntiClockwise = () => {

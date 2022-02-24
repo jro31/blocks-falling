@@ -2,6 +2,7 @@ import useGameIsInProgress from './use-game-is-in-progress';
 import useMoveBlockDown from './use-move-block-down';
 import useMoveBlockLeft from './use-move-block-left';
 import useMoveBlockRight from './use-move-block-right';
+import { down, left, right } from '../store/game-board';
 
 const useMoveBlock = () => {
   const gameIsInProgress = useGameIsInProgress();
@@ -13,13 +14,13 @@ const useMoveBlock = () => {
     if (!gameIsInProgress()) return;
 
     switch (direction) {
-      case 'down':
+      case down:
         moveBlockDown();
         break;
-      case 'left':
+      case left:
         moveBlockLeft();
         break;
-      case 'right':
+      case right:
         moveBlockRight();
         break;
       default:
