@@ -8,14 +8,6 @@
   max-width: var(--button-max-diameter);
   height: var(--button-diameter);
   max-height: var(--button-max-diameter);
-  transition: box-shadow var(--transition-time);
-}
-
-.light {
-  box-shadow: var(--light-box-shadow);
-}
-
-.dark {
   box-shadow: var(--dark-box-shadow);
 }
 

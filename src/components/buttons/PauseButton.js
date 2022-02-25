@@ -2,14 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { gameBoardActions, gameOver, inProgress, paused, preGame } from '../../store/game-board';
 import useBeginGame from '../../hooks/use-begin-game';
-import useBackgroundIsDark from '../../hooks/use-background-is-dark';
 import styles from './PauseButton.module.css';
 
 const PauseButton = () => {
   const dispatch = useDispatch();
   const status = useSelector(state => state.gameBoard.status);
   const beginGame = useBeginGame();
-  const backgroundIsDark = useBackgroundIsDark();
 
   const icon = () => (status === inProgress ? '/icons/pause.svg' : '/icons/play.svg');
 
@@ -30,10 +28,8 @@ const PauseButton = () => {
     }
   };
 
-  const buttonColorClass = () => (backgroundIsDark() ? styles.light : styles.dark);
-
   return (
-    <div className={`${styles['pause-button']} ${buttonColorClass()}`} onClick={buttonClickHandler}>
+    <div className={styles['pause-button']} onClick={buttonClickHandler}>
       <img src={icon()} alt='II' />
     </div>
   );

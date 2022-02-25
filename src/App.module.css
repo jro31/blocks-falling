@@ -64,11 +64,6 @@
   background-image: radial-gradient(circle farthest-side, #fceabb, #f8b500);
 }
 
-.red-dead,
-.red-dead-before::before {
-  background-image: linear-gradient(to right, #870000, #190a05);
-}
-
 .chlorophyll,
 .chlorophyll-before::before {
   background-image: radial-gradient(
@@ -79,11 +74,6 @@
     rgba(144, 213, 135, 1) 74.1%,
     rgba(75, 118, 69, 1) 100.3%
   );
-}
-
-.wild-hunt,
-.wild-hunt-before::before {
-  background-image: linear-gradient(to right, #434343 0%, black 100%);
 }
 
 .spectrum,
