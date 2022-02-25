@@ -1,10 +1,20 @@
 .pause-button {
   border-radius: 5%;
-  background-color: rgba(0, 0, 0, 0.2);
   padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 50px;
+  margin: 0 15px;
+  transition: box-shadow var(--transition-time);
+}
+
+.light {
+  box-shadow: var(--light-box-shadow);
+}
+
+.dark {
+  box-shadow: var(--dark-box-shadow);
 }
 
 .pause-button > img {

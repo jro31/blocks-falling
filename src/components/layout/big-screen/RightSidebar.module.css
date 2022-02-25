@@ -5,6 +5,8 @@
 }
 
 .top-score-pause-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .buttons-container {

@@ -1,3 +1,4 @@
+import MoveDownButton from '../../buttons/MoveDownButton';
 import MoveLeftButton from '../../buttons/MoveLeftButton';
 import RotateAntiClockwiseButton from '../../buttons/RotateAntiClockwiseButton';
 import LinesScore from '../../scoring/LinesScore';
@@ -10,8 +11,15 @@ const LeftSidebar = () => {
         <LinesScore />
       </div>
       <div className={styles['buttons-container']}>
-        <RotateAntiClockwiseButton />
-        <MoveLeftButton />
+        <div className={styles['down-button-container']}>
+          <MoveDownButton />
+        </div>
+        <div className={styles['anti-clockwise-button-container']}>
+          <RotateAntiClockwiseButton />
+        </div>
+        <div className={styles['move-left-button-container']}>
+          <MoveLeftButton />
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,6 @@
 import styles from './Scoreboard.module.css';
 
 const Scoreboard = props => {
-  console.log(props);
-
   return (
     <div
       className={`${styles['scoreboard']} ${
