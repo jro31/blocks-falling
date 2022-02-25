@@ -3,7 +3,7 @@
   --buttons-container-height: 50px;
   --rows: 21;
   --columns: 10;
-  --sidebar-min-width: 75px;
+  --sidebar-min-width: 95px;
   --gameboard-width: min(
     calc(
       (100vh - (var(--scoreboard-height) + var(--buttons-container-height))) /

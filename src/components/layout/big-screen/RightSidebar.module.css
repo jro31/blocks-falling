@@ -15,12 +15,13 @@
   flex-direction: column;
   align-items: flex-end;
   padding-bottom: 15px;
+  width: 100%;
 }
 
 .clockwise-button-container {
-  margin-right: calc(var(--thumb-length) * 0.75);
+  margin-right: min(calc(var(--thumb-length) * 0.75), calc(100% - var(--button-max-diameter)));
 }
 
 .move-right-button-container {
-  margin-right: var(--thumb-length);
+  margin-right: min(var(--thumb-length), calc(100% - var(--button-max-diameter)));
 }

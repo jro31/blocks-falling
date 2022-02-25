@@ -12,16 +12,17 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 15px;
+  width: 100%;
 }
 
 .down-button-container {
-  margin-left: calc(var(--thumb-length) * 0.25);
+  margin-left: min(calc(var(--thumb-length) * 0.25), calc(100% - var(--button-max-diameter)));
 }
 
 .anti-clockwise-button-container {
-  margin-left: calc(var(--thumb-length) * 0.75);
+  margin-left: min(calc(var(--thumb-length) * 0.75), calc(100% - var(--button-max-diameter)));
 }
 
 .move-left-button-container {
-  margin-left: var(--thumb-length);
+  margin-left: min(var(--thumb-length), calc(100% - var(--button-max-diameter)));
 }
