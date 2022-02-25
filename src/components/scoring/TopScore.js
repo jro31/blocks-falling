@@ -1,7 +1,7 @@
-import styles from './TopScore.module.css';
+import Scoreboard from './Scoreboard';
 
 const TopScore = () => {
-  return <div className={styles['top-score']}>Top score</div>;
+  return <Scoreboard name='Top score' score={999} />;
 };
 
 export default TopScore;

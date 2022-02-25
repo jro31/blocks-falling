@@ -1,3 +1,4 @@
+import TopScore from '../../scoring/TopScore';
 import MoveRightButton from '../../buttons/MoveRightButton';
 import PauseButton from '../../buttons/PauseButton';
 import RotateClockwiseButton from '../../buttons/RotateClockwiseButton';
@@ -7,7 +8,7 @@ const RightSidebar = () => {
   return (
     <div className={`sidebar ${styles['right-sidebar']}`}>
       <div className={styles['top-score-pause-container']}>
-        <div>Top score</div>
+        <TopScore />
         <PauseButton />
       </div>
       <div className={styles['buttons-container']}>

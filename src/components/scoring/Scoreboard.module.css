@@ -1,0 +1,19 @@
+.scoreboard {
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.align-right {
+  align-items: flex-end;
+}
+
+.name {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.score {
+  font-size: 45px;
+}
