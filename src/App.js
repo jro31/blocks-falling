@@ -7,6 +7,7 @@ import MobileButtons from './components/layout/mobile/MobileButtons';
 import RightSidebar from './components/layout/big-screen/RightSidebar';
 
 import styles from './App.module.css';
+import { useEffect } from 'react';
 
 const App = () => {
   const backgroundOne = useSelector(state => state.gameBoard.backgroundOne);
@@ -18,6 +19,16 @@ const App = () => {
       liveBackground === 'one' ? styles['before-is-hidden'] : styles['before-is-visible']
     } ${styles[backgroundOne]} ${styles[`${backgroundTwo}-before`]}`;
   };
+
+  const setScreenHeightCssVariable = () => {
+    document.documentElement.style.setProperty('--screen-height', `${window.innerHeight}px`);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', setScreenHeightCssVariable);
+    setScreenHeightCssVariable();
+    return () => window.removeEventListener('resize', setScreenHeightCssVariable);
+  }, []);
 
   return (
     <div className={`${styles['page-container']} ${backgroundClasses()}`}>

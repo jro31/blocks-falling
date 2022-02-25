@@ -1,12 +1,13 @@
 :root {
+  --screen-height: 100vh;
   --scoreboard-height: 50px;
-  --buttons-container-height: min(85px, calc(100vw / 5), calc(100vh / 6));
+  --buttons-container-height: min(85px, calc(100vw / 5), calc(var(--screen-height) / 6));
   --rows: 21;
   --columns: 10;
   --sidebar-min-width: 95px;
   --gameboard-width: min(
     calc(
-      (100vh - (var(--scoreboard-height) + var(--buttons-container-height))) /
+      (var(--screen-height) - (var(--scoreboard-height) + var(--buttons-container-height))) /
         (var(--rows) / var(--columns))
     ),
     100vw
@@ -24,7 +25,7 @@
 @media (min-width: 640px) {
   :root {
     --gameboard-width: min(
-      calc(100vh / (var(--rows) / var(--columns))),
+      calc(var(--screen-height) / (var(--rows) / var(--columns))),
       calc(100vw - (var(--sidebar-min-width) * 2))
     );
     --sidebar-width: calc((100vw - var(--gameboard-width)) / 2);
