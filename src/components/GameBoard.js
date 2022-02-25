@@ -113,7 +113,7 @@ const GameBoard = () => {
               <div
                 key={`square-${row}-${column}`}
                 className={`${styles.square} ${styles[squares[row][column].status]} ${
-                  styles[squares[row][column].block]
+                  styles[squares[row][column].block] || ''
                 }`}
               />
             ))}

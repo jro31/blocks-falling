@@ -2,10 +2,16 @@
   color: white;
   display: flex;
   flex-direction: column;
+  padding: 10px 15px;
+}
+
+.align-left {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .align-right {
   align-items: flex-end;
+  text-shadow: -2px -2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .name {
