@@ -7,7 +7,12 @@
   width: 50px;
   margin: 0 15px;
   transition: box-shadow var(--transition-time);
-  box-shadow: var(--dark-box-shadow);
+}
+
+@media (min-width: 640px) {
+  .pause-button {
+    box-shadow: var(--dark-box-shadow);
+  }
 }
 
 .pause-button > img {
