@@ -1,8 +1,6 @@
-/* @import '../index.css'; */
-
 .mobile-scoreboard {
   height: var(--scoreboard-height);
-  width: var(--gameboard-width);
+  width: 100vw;
   display: flex;
   justify-content: space-between;
 }
@@ -13,8 +11,17 @@
   }
 }
 
-.top-score-pause-container {
+.mobile-scoreboard > * {
+  flex-basis: 33%;
+}
+
+@media (min-width: 640px) {
+  .mobile-scoreboard > * {
+    flex-basis: auto;
+  }
+}
+
+.pause-button-container {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 }

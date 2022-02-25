@@ -1,8 +1,14 @@
 .scoreboard {
   display: flex;
   flex-direction: column;
-  padding: 10px 15px;
+  padding: 5px 10px;
   color: black;
+}
+
+@media (min-width: 640px) {
+  .scoreboard {
+    padding: 10px 15px;
+  }
 }
 
 .align-left {
@@ -15,11 +21,23 @@
 }
 
 .name {
-  font-size: 20px;
+  font-size: 15px;
   text-transform: uppercase;
   font-weight: bold;
 }
 
+@media (min-width: 640px) {
+  .name {
+    font-size: 20px;
+  }
+}
+
 .score {
-  font-size: 45px;
+  font-size: 20px;
+}
+
+@media (min-width: 640px) {
+  .score {
+    font-size: 45px;
+  }
 }

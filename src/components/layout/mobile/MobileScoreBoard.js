@@ -8,10 +8,10 @@ const MobileScoreBoard = () => {
   return (
     <div className={styles['mobile-scoreboard']}>
       <LinesScore />
-      <div className={styles['top-score-pause-container']}>
-        <TopScore />
+      <div className={styles['pause-button-container']}>
         <PauseButton />
       </div>
+      <TopScore />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 :root {
   --scoreboard-height: 50px;
-  --buttons-container-height: 50px;
+  --buttons-container-height: min(85px, calc(100vw / 5), calc(100vh / 6));
   --rows: 21;
   --columns: 10;
   --sidebar-min-width: 95px;

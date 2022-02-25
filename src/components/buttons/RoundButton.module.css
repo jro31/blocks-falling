@@ -12,6 +12,13 @@
 }
 
 .round-button > * {
-  width: 65px;
-  height: 65px;
+  width: calc(var(--button-diameter) - 15px);
+  height: calc(var(--button-diameter) - 15px);
+}
+
+@media (min-width: 640px) {
+  .round-button > * {
+    width: 65px;
+    height: 65px;
+  }
 }

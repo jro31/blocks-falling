@@ -94,11 +94,13 @@
 .game-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   z-index: 2;
 }
 
 @media (min-width: 640px) {
   .game-container {
     flex-direction: row;
+    align-items: stretch;
   }
 }

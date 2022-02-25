@@ -1,8 +1,8 @@
-/* @import '../index.css'; */
-
 .mobile-buttons-container {
   height: var(--buttons-container-height);
-  width: var(--gameboard-width);
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (min-width: 640px) {
