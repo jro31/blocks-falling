@@ -3,7 +3,6 @@ import MoveRightButton from '../../buttons/MoveRightButton';
 import PauseButton from '../../buttons/PauseButton';
 import RotateClockwiseButton from '../../buttons/RotateClockwiseButton';
 import styles from './RightSidebar.module.css';
-import DropButton from '../../buttons/DropButton';
 
 const RightSidebar = () => {
   return (
@@ -13,9 +12,12 @@ const RightSidebar = () => {
         <PauseButton />
       </div>
       <div className={styles['buttons-container']}>
-        <DropButton />
-        <RotateClockwiseButton />
-        <MoveRightButton />
+        <div className={styles['clockwise-button-container']}>
+          <RotateClockwiseButton />
+        </div>
+        <div className={styles['move-right-button-container']}>
+          <MoveRightButton />
+        </div>
       </div>
     </div>
   );

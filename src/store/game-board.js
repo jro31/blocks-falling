@@ -250,6 +250,15 @@ const gameBoardSlice = createSlice({
         state.squares = mergeNestedObjects(current(state.squares), newBlockShape(newBlock));
         state.timer = { isLive: true };
       } else {
+        if (
+          !Object.keys(current(state.squares)[0])
+            .map(square => current(state.squares)[0][square].status)
+            .includes(settled)
+        ) {
+          state.squares = mergeNestedObjects(current(state.squares), {
+            0: { ...newBlockShape(newBlock)[1] },
+          });
+        }
         state.status = gameOver;
       }
     },

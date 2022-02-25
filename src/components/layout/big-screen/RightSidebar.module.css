@@ -11,4 +11,16 @@
 
 .buttons-container {
   align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-bottom: 15px;
+}
+
+.clockwise-button-container {
+  margin-right: calc(var(--thumb-length) * 0.75);
+}
+
+.move-right-button-container {
+  margin-right: var(--thumb-length);
 }
