@@ -20,18 +20,6 @@
   text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.name {
-  font-size: 15px;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-@media (min-width: 640px) {
-  .name {
-    font-size: 20px;
-  }
-}
-
 .score {
   font-size: 20px;
 }

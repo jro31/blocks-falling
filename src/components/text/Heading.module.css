@@ -1,0 +1,11 @@
+.heading {
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+@media (min-width: 640px) {
+  .heading {
+    font-size: 20px;
+  }
+}

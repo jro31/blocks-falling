@@ -8,6 +8,8 @@ const RightSidebar = () => {
   return (
     <div className={`sidebar ${styles['right-sidebar']}`}>
       <div className={styles['top-score-pause-container']}>
+        {/* TODO - If no top score exists, instead display the keyboard controls in it's place */}
+        {/* On small screens, just display 'Top score 0' as happens now */}
         <TopScore />
         <PauseButton />
       </div>
