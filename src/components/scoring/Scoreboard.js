@@ -1,4 +1,3 @@
-import Heading from '../text/Heading';
 import styles from './Scoreboard.module.css';
 
 const Scoreboard = props => {
@@ -8,7 +7,7 @@ const Scoreboard = props => {
         props.alignRight ? styles['align-right'] : styles['align-left']
       }`}
     >
-      <Heading>{props.name}</Heading>
+      <div className={styles.name}>{props.name}</div>
       <div className={styles.score}>{props.score}</div>
     </div>
   );
