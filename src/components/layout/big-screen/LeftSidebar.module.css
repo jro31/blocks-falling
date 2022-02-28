@@ -1,0 +1,28 @@
+.left-sidebar {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.score-container {
+}
+
+.buttons-container {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
+  width: 100%;
+}
+
+.down-button-container {
+  margin-left: min(calc(var(--thumb-length) * 0.25), calc(100% - var(--button-max-diameter)));
+}
+
+.anti-clockwise-button-container {
+  margin-left: min(calc(var(--thumb-length) * 0.75), calc(100% - var(--button-max-diameter)));
+}
+
+.move-left-button-container {
+  margin-left: min(var(--thumb-length), calc(100% - var(--button-max-diameter)));
+}

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { gameBoardActions } from '../store/game-board';
+import { gameBoardActions, left } from '../store/game-board';
 import useCanMoveBlock from './use-can-move-block';
 import useLiveBlockShape from './use-live-block-shape';
 import useUpdatedGameBoard from './use-updated-game-board';
@@ -12,7 +12,7 @@ const useMoveBlockLeft = () => {
   const updatedGameBoard = useUpdatedGameBoard();
 
   const moveBlockLeft = () => {
-    if (!canMove('left')) return;
+    if (!canMove(left)) return;
 
     const initialShape = liveBlockShape();
     let movedBlock = {};

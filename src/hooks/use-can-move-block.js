@@ -3,6 +3,7 @@ import useIsTouchingWall from './use-is-touching-wall';
 import useIsBlockBelow from './use-is-block-below';
 import useIsBlockToSide from './use-is-block-to-side';
 import useGameIsInProgress from './use-game-is-in-progress';
+import { down, left, right } from '../store/game-board';
 
 const useCanMoveBlock = () => {
   const isTouchingBottom = useIsTouchingBottom();
@@ -11,28 +12,28 @@ const useCanMoveBlock = () => {
   const isBlockToSide = useIsBlockToSide();
   const gameIsInProgress = useGameIsInProgress();
 
-  const down = () => {
+  const canMoveDown = () => {
     return !isTouchingBottom() && !isBlockBelow();
   };
 
-  const left = () => {
-    return !isTouchingWall('left') && !isBlockToSide('left');
+  const canMoveLeft = () => {
+    return !isTouchingWall(left) && !isBlockToSide(left);
   };
 
-  const right = () => {
-    return !isTouchingWall('right') && !isBlockToSide('right');
+  const canMoveRight = () => {
+    return !isTouchingWall(right) && !isBlockToSide(right);
   };
 
   const canMove = direction => {
     if (!gameIsInProgress()) return false;
 
     switch (direction) {
-      case 'down':
-        return down();
-      case 'left':
-        return left();
-      case 'right':
-        return right();
+      case down:
+        return canMoveDown();
+      case left:
+        return canMoveLeft();
+      case right:
+        return canMoveRight();
       default:
         return;
     }

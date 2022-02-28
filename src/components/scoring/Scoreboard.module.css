@@ -1,0 +1,43 @@
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 10px;
+  color: black;
+}
+
+@media (min-width: 640px) {
+  .scoreboard {
+    padding: 10px 15px;
+  }
+}
+
+.align-left {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.align-right {
+  align-items: flex-end;
+  text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.name {
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+@media (min-width: 640px) {
+  .name {
+    font-size: 20px;
+  }
+}
+
+.score {
+  font-size: 20px;
+}
+
+@media (min-width: 640px) {
+  .score {
+    font-size: 45px;
+  }
+}

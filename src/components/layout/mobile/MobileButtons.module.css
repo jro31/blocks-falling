@@ -1,0 +1,12 @@
+.mobile-buttons-container {
+  height: var(--buttons-container-height);
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .mobile-buttons-container {
+    display: none;
+  }
+}

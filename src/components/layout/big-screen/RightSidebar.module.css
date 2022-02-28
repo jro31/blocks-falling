@@ -1,0 +1,27 @@
+.right-sidebar {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.top-score-pause-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons-container {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-bottom: 15px;
+  width: 100%;
+}
+
+.clockwise-button-container {
+  margin-right: min(calc(var(--thumb-length) * 0.75), calc(100% - var(--button-max-diameter)));
+}
+
+.move-right-button-container {
+  margin-right: min(var(--thumb-length), calc(100% - var(--button-max-diameter)));
+}

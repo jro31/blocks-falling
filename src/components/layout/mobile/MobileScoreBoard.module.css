@@ -1,0 +1,27 @@
+.mobile-scoreboard {
+  height: var(--scoreboard-height);
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .mobile-scoreboard {
+    display: none;
+  }
+}
+
+.mobile-scoreboard > * {
+  flex-basis: 33%;
+}
+
+@media (min-width: 640px) {
+  .mobile-scoreboard > * {
+    flex-basis: auto;
+  }
+}
+
+.pause-button-container {
+  display: flex;
+  justify-content: center;
+}

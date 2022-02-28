@@ -1,0 +1,13 @@
+.keyboard-controls {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 15px;
+  color: black;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.heading {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}

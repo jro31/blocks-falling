@@ -1,0 +1,16 @@
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 25px;
+}
+
+.key-name {
+  flex: 0 0 3rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.action {
+  flex: 1 0 10rem;
+}

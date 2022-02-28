@@ -1,0 +1,24 @@
+.round-button {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: var(--button-diameter);
+  max-width: var(--button-max-diameter);
+  height: var(--button-diameter);
+  max-height: var(--button-max-diameter);
+  box-shadow: var(--dark-box-shadow);
+}
+
+.round-button > * {
+  width: calc(var(--button-diameter) - 15px);
+  height: calc(var(--button-diameter) - 15px);
+}
+
+@media (min-width: 640px) {
+  .round-button > * {
+    width: 65px;
+    height: 65px;
+  }
+}

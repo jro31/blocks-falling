@@ -18,6 +18,9 @@ export const sBlock = 's-block';
 export const tBlock = 't-block';
 export const zBlock = 'z-block';
 
+export const left = 'left';
+export const right = 'right';
+export const down = 'down';
 export const clockwise = 'clockwise';
 export const antiClockwise = 'anti-clockwise';
 
@@ -41,6 +44,20 @@ const initialSquares = () => {
 };
 
 export const blocks = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
+
+const backgrounds = [
+  'superman',
+  'orange-coral',
+  'deep-sea',
+  'sunrise',
+  'fresh-air',
+  'cherry-blossom',
+  'mango',
+  'chlorophyll',
+  'spectrum',
+  'not-dead-red',
+  'sand-to-sea',
+];
 
 const blockObject = block => {
   return {
@@ -204,6 +221,9 @@ const initialState = {
   timer: { isLive: true },
   status: preGame,
   clearedRows: 0,
+  backgroundOne: backgrounds[Math.floor(Math.random() * backgrounds.length)],
+  backgroundTwo: backgrounds[Math.floor(Math.random() * backgrounds.length)],
+  liveBackground: 'one',
 };
 
 const gameBoardSlice = createSlice({
@@ -216,10 +236,29 @@ const gameBoardSlice = createSlice({
       state.liveBlock = newBlock;
       state.blockCounter = state.blockCounter + 1;
 
+      if (state.blockCounter % 5 === 0) {
+        if (state.liveBackground === 'one') {
+          state.liveBackground = 'two';
+          state.backgroundTwo = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+        } else {
+          state.liveBackground = 'one';
+          state.backgroundOne = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+        }
+      }
+
       if (canAddBlock(newBlockShape(newBlock), current(state.squares))) {
         state.squares = mergeNestedObjects(current(state.squares), newBlockShape(newBlock));
         state.timer = { isLive: true };
       } else {
+        if (
+          !Object.keys(current(state.squares)[0])
+            .map(square => current(state.squares)[0][square].status)
+            .includes(settled)
+        ) {
+          state.squares = mergeNestedObjects(current(state.squares), {
+            0: { ...newBlockShape(newBlock)[1] },
+          });
+        }
         state.status = gameOver;
       }
     },

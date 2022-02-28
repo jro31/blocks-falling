@@ -4,14 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   antiClockwise,
   clockwise,
+  down,
   gameBoardActions,
   gameOver,
   inProgress,
+  left,
   paused,
   preGame,
+  right,
 } from '../store/game-board';
 import useMoveBlock from '../hooks/use-move-block';
 import useRotateBlock from '../hooks/use-rotate-block';
+import useBeginGame from '../hooks/use-begin-game';
+
+import styles from './Gameboard.module.css';
 
 let timeOut;
 export let squaresRef;
@@ -24,7 +30,6 @@ const GameBoard = () => {
   const speed = useSelector(state => state.gameBoard.speed);
   const timer = useSelector(state => state.gameBoard.timer);
   const status = useSelector(state => state.gameBoard.status);
-  const clearedRows = useSelector(state => state.gameBoard.clearedRows);
   const liveBlock = useSelector(state => state.gameBoard.liveBlock);
   squaresRef = useRef(squares);
   squaresRef.current = squares;
@@ -35,77 +40,38 @@ const GameBoard = () => {
 
   const moveBlock = useMoveBlock();
   const rotateBlock = useRotateBlock();
-
-  const startGame = () => {
-    dispatch(gameBoardActions.startGame());
-    newBlock();
-  };
-
-  const pauseGame = () => {
-    dispatch(gameBoardActions.pauseGame());
-  };
-
-  const resumeGame = () => {
-    dispatch(gameBoardActions.resumeGame());
-  };
-
-  const newBlock = () => {
-    dispatch(gameBoardActions.nextBlock());
-  };
-
-  const moveBlockDown = () => {
-    moveBlock('down');
-  };
-
-  const moveBlockLeft = () => {
-    moveBlock('left');
-  };
-
-  const moveBlockRight = () => {
-    moveBlock('right');
-  };
-
-  const rotateAntiClockwise = () => {
-    rotateBlock(antiClockwise);
-  };
-
-  const rotateClockwise = () => {
-    rotateBlock(clockwise);
-  };
+  const beginGame = useBeginGame();
 
   const handleKeyPress = event => {
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
-        moveBlockDown();
+        moveBlock(down);
         break;
       case 'ArrowLeft':
         event.preventDefault();
-        moveBlockLeft();
+        moveBlock(left);
         break;
       case 'ArrowRight':
         event.preventDefault();
-        moveBlockRight();
+        moveBlock(right);
         break;
       case 'z':
         event.preventDefault();
-        rotateAntiClockwise();
+        rotateBlock(antiClockwise);
         break;
       case 'x':
         event.preventDefault();
-        rotateClockwise();
+        rotateBlock(clockwise);
         break;
       case ' ':
         event.preventDefault();
-        if (statusRef.current === preGame) {
-          startGame();
-        } else if (statusRef.current === gameOver) {
-          dispatch(gameBoardActions.resetGame());
-          startGame();
+        if (statusRef.current === preGame || statusRef.current === gameOver) {
+          beginGame();
         } else if (statusRef.current === inProgress) {
-          pauseGame();
+          dispatch(gameBoardActions.pauseGame());
         } else if (statusRef.current === paused) {
-          resumeGame();
+          dispatch(gameBoardActions.resumeGame());
         }
         break;
       default:
@@ -125,7 +91,7 @@ const GameBoard = () => {
     if (status === inProgress) {
       if (timer.isLive) {
         timeOut = setTimeout(() => {
-          moveBlockDown();
+          moveBlock(down);
         }, speed);
       }
     }
@@ -137,24 +103,23 @@ const GameBoard = () => {
 
   return (
     <Fragment>
-      <div className='gameboard-container'>
+      <div className={styles.gameboard}>
         {Array.from(new Array(Object.keys(squares).length), (_, i) => i).map(row => (
-          <div key={`row-${row}`} className='row'>
+          <div key={`row-${row}`} className={styles.row}>
             {Array.from(
               new Array(Object.keys(squares[Object.keys(squares)[0]]).length),
               (_, i) => i + 1
             ).map(column => (
               <div
                 key={`square-${row}-${column}`}
-                className={`square ${squares[row][column].status} ${squares[row][column].block}`}
+                className={`${styles.square} ${styles[squares[row][column].status]} ${
+                  styles[squares[row][column].block] || ''
+                }`}
               />
             ))}
           </div>
         ))}
       </div>
-      <h1>
-        {clearedRows} {status}
-      </h1>
     </Fragment>
   );
 };
