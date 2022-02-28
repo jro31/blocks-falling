@@ -85,7 +85,7 @@ const GameBoard = () => {
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (status === inProgress) {
@@ -99,7 +99,7 @@ const GameBoard = () => {
     return () => {
       clearTimeout(timeOut);
     };
-  }, [status, timer]);
+  }, [status, timer]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Fragment>

@@ -41,7 +41,7 @@ const App = () => {
   useEffect(() => {
     if (localStorage.getItem('tetris.top-score'))
       setTopScoreState(localStorage.getItem('tetris.top-score'));
-  }, []);
+  }, [setTopScoreState]);
 
   useEffect(() => {
     if (status === gameOver) {
@@ -50,7 +50,7 @@ const App = () => {
         localStorage.setItem('tetris.top-score', clearedRows);
       }
     }
-  }, [status]);
+  }, [status]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={`${styles['page-container']} ${backgroundClasses()}`}>

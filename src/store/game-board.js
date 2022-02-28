@@ -24,18 +24,26 @@ export const down = 'down';
 export const clockwise = 'clockwise';
 export const antiClockwise = 'anti-clockwise';
 
-export const deadRow = Array.from(new Array(10), (_, i) => i + 1).reduce(
+// prettier-ignore
+const arrayOfNumbers = (startingNumber, amountOfNumbers, increment) => {
+  return Array.from(new Array(amountOfNumbers), (_, i) => (i + startingNumber) + (i * (increment - 1)))
+};
+
+export const deadRow = arrayOfNumbers(1, 10, 1).reduce(
+  // eslint-disable-next-line no-sequences
   (acc, curr) => ((acc[curr] = { status: dead, block: '' }), acc),
   {}
 );
 
-export const emptyRow = Array.from(new Array(10), (_, i) => i + 1).reduce(
+export const emptyRow = arrayOfNumbers(1, 10, 1).reduce(
+  // eslint-disable-next-line no-sequences
   (acc, curr) => ((acc[curr] = { status: empty, block: '' }), acc),
   {}
 );
 
 const initialSquares = () => {
   const returnObject = Array.from(new Array(20), (_, i) => i + 1).reduce(
+    // eslint-disable-next-line no-sequences
     (acc, curr) => ((acc[curr] = emptyRow), acc),
     {}
   );
