@@ -1,14 +1,20 @@
+import { useSelector } from 'react-redux';
+
 import TopScore from '../../scoring/TopScore';
 import MoveRightButton from '../../buttons/MoveRightButton';
 import PauseButton from '../../buttons/PauseButton';
 import RotateClockwiseButton from '../../buttons/RotateClockwiseButton';
 import styles from './RightSidebar.module.css';
+import KeyboardControls from './KeyboardControls';
 
 const RightSidebar = () => {
+  const topScore = useSelector(state => state.topScore.topScore);
+
   return (
     <div className={`sidebar ${styles['right-sidebar']}`}>
       <div className={styles['top-score-pause-container']}>
-        <TopScore />
+        {!topScore && <KeyboardControls />}
+        {topScore > 0 && <TopScore />}
         <PauseButton />
       </div>
       <div className={styles['buttons-container']}>
