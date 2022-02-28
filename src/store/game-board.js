@@ -205,6 +205,62 @@ const canAddBlock = (nextBlock, currentGrid) => {
   return true
 };
 
+const isCompletedRows = currentGrid => {
+  let returnBool = false;
+  let statusArray = [];
+
+  Object.keys(currentGrid).forEach(rowKey => {
+    if (!returnBool) {
+      statusArray = [];
+      Object.keys(currentGrid[rowKey]).forEach(columnKey => {
+        statusArray.push(currentGrid[rowKey][columnKey].status);
+      });
+      if (statusArray.every(status => status === settled)) returnBool = true;
+    }
+  });
+
+  return returnBool;
+};
+
+const numberOfCompletedRows = currentGrid => {
+  let completedRows = [];
+  let statusArray = [];
+
+  Object.keys(currentGrid).forEach(rowKey => {
+    statusArray = [];
+    Object.keys(currentGrid[rowKey]).forEach(columnKey => {
+      statusArray.push(currentGrid[rowKey][columnKey].status);
+    });
+    if (statusArray.every(status => status === settled)) completedRows.push(rowKey);
+  });
+
+  return completedRows.length;
+};
+
+const clearCompletedRows = currentGrid => {
+  let returnObject = JSON.parse(JSON.stringify(currentGrid));
+  let statusArray = [];
+
+  Object.keys(returnObject).forEach(rowKey => {
+    statusArray = [];
+    Object.keys(returnObject[rowKey]).forEach(columnKey => {
+      statusArray.push(returnObject[rowKey][columnKey].status);
+    });
+    if (statusArray.every(status => status === settled)) {
+      [...Array(parseInt(rowKey)).keys()].reverse().forEach(fallingRowKey => {
+        if (fallingRowKey === 0) {
+          returnObject[fallingRowKey] = deadRow;
+          returnObject[fallingRowKey + 1] = emptyRow;
+        } else {
+          returnObject[fallingRowKey + 1] = returnObject[fallingRowKey];
+        }
+      });
+    }
+  });
+
+  return returnObject;
+};
+
 const mergeNestedObjects = (existingObject, newObject) => {
   let returnObject = { ...existingObject };
 
@@ -273,9 +329,17 @@ const gameBoardSlice = createSlice({
     updateGameBoard(state, action) {
       state.squares = action.payload;
     },
-    updateClearedRows(state, action) {
-      state.clearedRows = state.clearedRows + action.payload;
-      state.speed = Math.max(initialState.speed - state.clearedRows * 25, 100);
+
+    updateClearedRows(state) {
+      if (isCompletedRows(current(state.squares))) {
+        state.clearedRows = state.clearedRows + numberOfCompletedRows(current(state.squares));
+        state.speed = Math.max(initialState.speed - state.clearedRows * 25, 100);
+      }
+    },
+    clearCompletedRows(state) {
+      if (isCompletedRows(current(state.squares))) {
+        state.squares = clearCompletedRows(current(state.squares));
+      }
     },
     startTimer(state) {
       state.timer = { isLive: true };

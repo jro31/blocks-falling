@@ -5,9 +5,6 @@ import useCanMoveBlock from './use-can-move-block';
 import useLiveBlockShape from './use-live-block-shape';
 import useUpdatedGameBoard from './use-updated-game-board';
 import useSettledBlock from './use-settled-block';
-import useIsCompletedRows from './use-is-completed-rows';
-import useNumberOfCompletedRows from './use-number-of-completed-rows';
-import useClearCompletedRows from './use-clear-completed-rows';
 
 const useMoveBlockDown = () => {
   const dispatch = useDispatch();
@@ -15,9 +12,6 @@ const useMoveBlockDown = () => {
   const liveBlockShape = useLiveBlockShape();
   const updatedGameBoard = useUpdatedGameBoard();
   const settledBlock = useSettledBlock();
-  const isCompletedRows = useIsCompletedRows();
-  const numberOfCompletedRows = useNumberOfCompletedRows();
-  const clearCompletedRows = useClearCompletedRows();
 
   const moveBlockDown = () => {
     dispatch(gameBoardActions.stopTimer());
@@ -36,10 +30,8 @@ const useMoveBlockDown = () => {
       dispatch(gameBoardActions.updateGameBoard(updatedGameBoard(movedBlock)));
     } else {
       dispatch(gameBoardActions.updateGameBoard(updatedGameBoard(settledBlock())));
-      if (isCompletedRows()) {
-        dispatch(gameBoardActions.updateClearedRows(numberOfCompletedRows()));
-        dispatch(gameBoardActions.updateGameBoard(clearCompletedRows()));
-      }
+      dispatch(gameBoardActions.updateClearedRows());
+      dispatch(gameBoardActions.clearCompletedRows());
       dispatch(gameBoardActions.nextBlock());
     }
     dispatch(gameBoardActions.startTimer());

@@ -11,7 +11,9 @@ const PauseButton = () => {
 
   const icon = () => (status === inProgress ? '/icons/pause.svg' : '/icons/play.svg');
 
-  const buttonClickHandler = () => {
+  const buttonClickHandler = event => {
+    event.preventDefault();
+
     switch (status) {
       case preGame:
       case gameOver:
