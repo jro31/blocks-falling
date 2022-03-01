@@ -4,12 +4,10 @@ import { gameBoardActions, gameOver, inProgress, paused, preGame } from '../../s
 import useBeginGame from '../../hooks/use-begin-game';
 import styles from './PauseButton.module.css';
 
-const PauseButton = () => {
+const PauseButton = props => {
   const dispatch = useDispatch();
   const status = useSelector(state => state.gameBoard.status);
   const beginGame = useBeginGame();
-
-  const icon = () => (status === inProgress ? '/icons/pause.svg' : '/icons/play.svg');
 
   const buttonClickHandler = event => {
     event.preventDefault();
@@ -31,8 +29,12 @@ const PauseButton = () => {
   };
 
   return (
-    <div className={styles['pause-button']} onClick={buttonClickHandler}>
-      <img src={icon()} alt='II' />
+    <div
+      className={`${styles['pause-button']} ${props.className || ''}`}
+      onClick={buttonClickHandler}
+    >
+      {status === inProgress && <div className={styles['pause-icon']}>=</div>}
+      {status !== inProgress && <div className={styles['play-icon']}>&#9654;&#65038;</div>}
     </div>
   );
 };

@@ -17,13 +17,38 @@
   align-items: center;
   width: calc(var(--button-diameter) - 15px);
   height: calc(var(--button-diameter) - 15px);
+}
+
+.rotate > * {
+  transform: translateY(-6px);
+  font-size: var(--button-diameter);
+}
+
+@media (min-width: 640px) {
+  .rotate > * {
+    font-size: 65px;
+  }
+
+  @media (min-height: 495px) {
+    .rotate > * {
+      font-size: 100px;
+    }
+  }
+}
+
+.move > * {
   font-size: calc(var(--button-diameter) - 15px);
 }
 
 @media (min-width: 640px) {
-  .round-button > * {
-    width: 65px;
-    height: 65px;
-    font-size: 65px;
+  .move > * {
+    font-size: 45px;
+    transform: translateY(2px);
+  }
+
+  @media (min-height: 495px) {
+    .move > * {
+      font-size: 65px;
+    }
   }
 }

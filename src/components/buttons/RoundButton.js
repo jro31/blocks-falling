@@ -8,7 +8,9 @@ const RoundButton = props => {
 
   return (
     <div
-      className={styles['round-button']}
+      className={`${styles['round-button']} ${
+        props.type === 'rotate' ? styles.rotate : styles.move
+      }`}
       onTouchStart={props.onTouchStart || null}
       onTouchEnd={props.onTouchEnd || null}
       onClick={buttonClickHandler}

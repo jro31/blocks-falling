@@ -1,3 +1,5 @@
+// TODO - Add some kind of animation for clearing a completed row
+
 import { useSelector } from 'react-redux';
 
 import { gameOver } from './store/game-board';
@@ -51,9 +53,6 @@ const App = () => {
       }
     }
   }, [status]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // TODO - Add some kind of 'Game over' graphic
-  // Currently the game just stops
 
   return (
     <div className={`${styles['page-container']} ${backgroundClasses()}`}>

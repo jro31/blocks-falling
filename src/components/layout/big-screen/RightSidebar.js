@@ -15,7 +15,7 @@ const RightSidebar = () => {
       <div className={styles['top-score-pause-container']}>
         {!topScore && <KeyboardControls />}
         {topScore > 0 && <TopScore />}
-        <PauseButton />
+        <PauseButton className={!topScore ? styles['pause-button'] : ''} />
       </div>
       <div className={styles['buttons-container']}>
         <div className={styles['clockwise-button-container']}>

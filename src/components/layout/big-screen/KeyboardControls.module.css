@@ -1,9 +1,15 @@
 .keyboard-controls {
-  display: flex;
+  display: none;
   flex-direction: column;
   padding: 10px 15px;
   color: black;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-height: 495px) {
+  .keyboard-controls {
+    display: flex;
+  }
 }
 
 .heading {

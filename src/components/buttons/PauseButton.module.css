@@ -15,7 +15,15 @@
   }
 }
 
-.pause-button > img {
-  width: 40px;
-  height: 40px;
+.pause-icon {
+  transform: rotate(90deg);
+  font-size: 50px;
+  font-weight: 900;
+  line-height: 30px;
+}
+
+.play-icon {
+  font-size: 30px;
+  line-height: 30px;
+  transform: translateY(3px);
 }
