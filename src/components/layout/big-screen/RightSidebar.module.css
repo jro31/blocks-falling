@@ -25,3 +25,13 @@
 .move-right-button-container {
   margin-right: min(var(--thumb-length), calc(100% - var(--button-max-diameter)));
 }
+
+.pause-button {
+  margin-top: 10px;
+}
+
+@media (min-height: 495px) {
+  .pause-button {
+    margin-top: 0;
+  }
+}
