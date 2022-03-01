@@ -7,7 +7,12 @@ const RoundButton = props => {
   };
 
   return (
-    <div className={styles['round-button']} onClick={buttonClickHandler}>
+    <div
+      className={styles['round-button']}
+      onTouchStart={props.onTouchStart || null}
+      onTouchEnd={props.onTouchEnd || null}
+      onClick={buttonClickHandler}
+    >
       {props.children}
     </div>
   );
