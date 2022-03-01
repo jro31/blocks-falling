@@ -9,11 +9,25 @@
   height: var(--button-diameter);
   max-height: var(--button-max-diameter);
   box-shadow: var(--dark-box-shadow);
+  /* pointer-events: none; */
+  /* -webkit-touch-callout: none; */
+  -webkit-touch-callout: none; /* Safari Touch */
+  -webkit-user-select: none; /* Webkit */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Edge*/
+  user-select: none;
 }
 
 .round-button > * {
   width: calc(var(--button-diameter) - 15px);
   height: calc(var(--button-diameter) - 15px);
+  /* pointer-events: none; */
+  /* -webkit-touch-callout: none; */
+  -webkit-touch-callout: none; /* Safari Touch */
+  -webkit-user-select: none; /* Webkit */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Edge*/
+  user-select: none;
 }
 
 @media (min-width: 640px) {

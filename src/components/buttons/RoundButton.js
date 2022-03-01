@@ -6,8 +6,16 @@ const RoundButton = props => {
     props.onClick();
   };
 
+  const buttonTouchHandler = event => {
+    event.preventDefault();
+  };
+
   return (
-    <div className={styles['round-button']} onClick={buttonClickHandler}>
+    <div
+      className={styles['round-button']}
+      onTouchStart={buttonTouchHandler}
+      onClick={buttonClickHandler}
+    >
       {props.children}
     </div>
   );
