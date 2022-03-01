@@ -30,7 +30,7 @@
     );
     --sidebar-width: calc((100vw - var(--gameboard-width)) / 2);
     --button-diameter: var(--sidebar-width);
-    --button-max-diameter: min(95px, var(--sidebar-width));
+    --button-max-diameter: min(95px, var(--sidebar-width), calc(var(--screen-height) / 5));
     --thumb-length: 150px;
   }
 }
