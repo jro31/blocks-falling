@@ -6,8 +6,7 @@ const RotateClockwiseButton = () => {
   const rotateBlock = useRotateBlock();
 
   return (
-    <RoundButton onClick={() => rotateBlock(clockwise)}>
-      {/* <img src='/icons/rotate-clockwise-arrow.svg' alt='X' /> */}
+    <RoundButton type='rotate' onClick={() => rotateBlock(clockwise)}>
       <div>&#8635;&#65038;</div>
     </RoundButton>
   );

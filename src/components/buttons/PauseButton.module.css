@@ -24,5 +24,6 @@
 
 .play-icon {
   font-size: 30px;
-  height: 30px;
+  line-height: 30px;
+  transform: translateY(3px);
 }

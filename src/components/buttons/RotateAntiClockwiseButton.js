@@ -6,8 +6,7 @@ const RotateAntiClockwiseButton = () => {
   const rotateBlock = useRotateBlock();
 
   return (
-    <RoundButton onClick={() => rotateBlock(antiClockwise)}>
-      {/* <img src='/icons/rotate-anti-clockwise-arrow.svg' alt='X' /> */}
+    <RoundButton type='rotate' onClick={() => rotateBlock(antiClockwise)}>
       <div>&#8634;&#65038;</div>
     </RoundButton>
   );

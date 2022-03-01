@@ -7,8 +7,6 @@ import RotateClockwiseButton from '../../buttons/RotateClockwiseButton';
 import styles from './RightSidebar.module.css';
 import KeyboardControls from './KeyboardControls';
 
-// FIXME - The KeyboardControls component stops the game board taking up the full height of the viewport on certain screens (iPad portrait)
-
 const RightSidebar = () => {
   const topScore = useSelector(state => state.topScore.topScore);
 
