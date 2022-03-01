@@ -45,7 +45,6 @@ const MoveDownButton = () => {
       onTouchEnd={buttonTouchEnd}
       onClick={buttonClickHandler}
     >
-      {/* <img src='/icons/down-arrow.svg' alt='D' /> */}
       <div>&#8675;</div>
     </RoundButton>
   );
