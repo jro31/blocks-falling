@@ -55,9 +55,6 @@ const App = () => {
     }
   }, [status]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // TODO - Add some kind of 'Game over' graphic
-  // Currently the game just stops
-
   return (
     <div className={`${styles['page-container']} ${backgroundClasses()}`}>
       <div className={styles['game-container']}>
