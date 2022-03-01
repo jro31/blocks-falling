@@ -114,7 +114,7 @@ const GameBoard = () => {
                 key={`square-${row}-${column}`}
                 className={`${styles.square} ${styles[squares[row][column].status]} ${
                   styles[squares[row][column].block] || ''
-                }`}
+                } ${status === gameOver ? styles['game-over'] : ''}`}
               />
             ))}
           </div>

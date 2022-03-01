@@ -1,3 +1,6 @@
+// TODO - Add some kind of animation for clearing a completed row
+// TODO - Make gameboard fit on mobile (probably just need to make the buttons a bit smaller)
+
 import { useSelector } from 'react-redux';
 
 import { gameOver } from './store/game-board';
