@@ -9,8 +9,6 @@ const PauseButton = () => {
   const status = useSelector(state => state.gameBoard.status);
   const beginGame = useBeginGame();
 
-  const icon = () => (status === inProgress ? '/icons/pause.svg' : '/icons/play.svg');
-
   const buttonClickHandler = event => {
     event.preventDefault();
 
@@ -32,7 +30,8 @@ const PauseButton = () => {
 
   return (
     <div className={styles['pause-button']} onClick={buttonClickHandler}>
-      <img src={icon()} alt='II' />
+      {status === inProgress && <div className={styles['pause-icon']}>=</div>}
+      {status !== inProgress && <div className={styles['play-icon']}>&#9654;&#65038;</div>}
     </div>
   );
 };

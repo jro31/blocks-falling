@@ -45,7 +45,7 @@ const MoveDownButton = () => {
       onTouchEnd={buttonTouchEnd}
       onClick={buttonClickHandler}
     >
-      <div>&#8675;</div>
+      <div>&#8675;&#65038;</div>
     </RoundButton>
   );
 };

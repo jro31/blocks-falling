@@ -7,7 +7,7 @@ const MoveRightButton = () => {
 
   return (
     <RoundButton onClick={() => moveBlock(right)}>
-      <img src='/icons/right-arrow.svg' alt='R' />
+      <div>&#10140;&#65038;</div>
     </RoundButton>
   );
 };
