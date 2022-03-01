@@ -11,54 +11,6 @@ const MoveDownButton = () => {
   let buttonIsPressedRef = useRef(buttonIsPressed);
   buttonIsPressedRef.current = buttonIsPressed;
 
-  // let interval;
-
-  // const buttonTouchStartHandler = event => {
-  //   setButtonIsPressed(true);
-
-  //   console.log('touch-start');
-  //   console.log(interval);
-
-  //   event.preventDefault();
-
-  //   moveBlock(down);
-
-  //   interval = setInterval(() => {
-  //     moveBlock(down);
-  //   }, 99);
-  //   console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥');
-  //   console.log(interval);
-  // };
-
-  // const buttonTouchEndHandler = event => {
-  //   setButtonIsPressed(false);
-
-  //   console.log('touch-end');
-  //   console.log(interval);
-
-  //   event.preventDefault();
-
-  //   clearInterval(interval);
-
-  //   console.log(interval);
-  // };
-
-  // const buttonPressHandler = () => {
-  //   let timeOut;
-
-  //   if (buttonIsPressed) {
-  //     timeOut = setTimeout(() => {
-  //       moveBlock(down);
-  //     }, 99);
-
-  //     // timeOut = setTimeout(() => {
-  //     //   moveBlock(down);
-  //     // }, speed);
-  //   } else {
-  //     clearTimeout(timeOut);
-  //   }
-  // };
-
   const buttonClickHandler = () => {
     moveBlock(down);
   };
@@ -93,7 +45,8 @@ const MoveDownButton = () => {
       onTouchEnd={buttonTouchEnd}
       onClick={buttonClickHandler}
     >
-      <img src='/icons/down-arrow.svg' alt='D' />
+      {/* <img src='/icons/down-arrow.svg' alt='D' /> */}
+      <div>&#8675;</div>
     </RoundButton>
   );
 };

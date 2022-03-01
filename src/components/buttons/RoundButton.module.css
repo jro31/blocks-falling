@@ -12,13 +12,18 @@
 }
 
 .round-button > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: calc(var(--button-diameter) - 15px);
   height: calc(var(--button-diameter) - 15px);
+  font-size: calc(var(--button-diameter) - 15px);
 }
 
 @media (min-width: 640px) {
   .round-button > * {
     width: 65px;
     height: 65px;
+    font-size: 65px;
   }
 }
