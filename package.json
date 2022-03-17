@@ -7,7 +7,6 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "firebase": "^9.6.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
@@ -37,17 +36,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "description": "An indistinct game made with React, where falling blocks must be rotated and fit together.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jro31/blocks-falling.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jro31/blocks-falling/issues"
-  },
-  "homepage": "https://github.com/jro31/blocks-falling#readme"
+  }
 }
