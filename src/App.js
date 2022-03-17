@@ -41,15 +41,15 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (localStorage.getItem('tetris.top-score'))
-      setTopScoreState(localStorage.getItem('tetris.top-score'));
+    if (localStorage.getItem('blocks-falling.top-score'))
+      setTopScoreState(localStorage.getItem('blocks-falling.top-score'));
   }, [setTopScoreState]);
 
   useEffect(() => {
     if (status === gameOver) {
       if ((topScore && clearedRows > topScore) || (!topScore && clearedRows > 0)) {
         setTopScoreState(clearedRows);
-        localStorage.setItem('tetris.top-score', clearedRows);
+        localStorage.setItem('blocks-falling.top-score', clearedRows);
       }
     }
   }, [status]); // eslint-disable-line react-hooks/exhaustive-deps
