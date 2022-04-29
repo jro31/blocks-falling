@@ -1,4 +1,5 @@
 import { createSlice, current } from '@reduxjs/toolkit';
+import arrayOfNumbers from 'array-of-numbers';
 
 export const preGame = 'pre-game';
 export const inProgress = 'in-progress';
@@ -23,11 +24,6 @@ export const right = 'right';
 export const down = 'down';
 export const clockwise = 'clockwise';
 export const antiClockwise = 'anti-clockwise';
-
-// prettier-ignore
-const arrayOfNumbers = (startingNumber, amountOfNumbers, increment) => {
-  return Array.from(new Array(amountOfNumbers), (_, i) => (i + startingNumber) + (i * (increment - 1)))
-};
 
 export const deadRow = arrayOfNumbers(1, 10, 1).reduce(
   // eslint-disable-next-line no-sequences
