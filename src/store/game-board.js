@@ -25,20 +25,20 @@ export const down = 'down';
 export const clockwise = 'clockwise';
 export const antiClockwise = 'anti-clockwise';
 
-export const deadRow = arrayOfNumbers(1, 10, 1).reduce(
+export const deadRow = arrayOfNumbers().reduce(
   // eslint-disable-next-line no-sequences
   (acc, curr) => ((acc[curr] = { status: dead, block: '' }), acc),
   {}
 );
 
-export const emptyRow = arrayOfNumbers(1, 10, 1).reduce(
+export const emptyRow = arrayOfNumbers().reduce(
   // eslint-disable-next-line no-sequences
   (acc, curr) => ((acc[curr] = { status: empty, block: '' }), acc),
   {}
 );
 
 const initialSquares = () => {
-  const returnObject = Array.from(new Array(20), (_, i) => i + 1).reduce(
+  const returnObject = arrayOfNumbers(1, 20).reduce(
     // eslint-disable-next-line no-sequences
     (acc, curr) => ((acc[curr] = emptyRow), acc),
     {}
