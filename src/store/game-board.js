@@ -1,5 +1,6 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 import arrayOfNumbers from 'array-of-numbers';
+import randomElement from 'random-element-selector';
 
 export const preGame = 'pre-game';
 export const inProgress = 'in-progress';
@@ -276,13 +277,13 @@ const mergeNestedObjects = (existingObject, newObject) => {
 const initialState = {
   squares: initialSquares(),
   speed: 1000,
-  liveBlock: blocks[Math.floor(Math.random() * blocks.length)],
+  liveBlock: randomElement(blocks),
   blockCounter: 0,
   timer: { isLive: true },
   status: preGame,
   clearedRows: 0,
-  backgroundOne: backgrounds[Math.floor(Math.random() * backgrounds.length)],
-  backgroundTwo: backgrounds[Math.floor(Math.random() * backgrounds.length)],
+  backgroundOne: randomElement(backgrounds),
+  backgroundTwo: randomElement(backgrounds),
   liveBackground: 'one',
 };
 
@@ -291,7 +292,7 @@ const gameBoardSlice = createSlice({
   initialState,
   reducers: {
     nextBlock(state) {
-      let newBlock = blocks[Math.floor(Math.random() * blocks.length)];
+      let newBlock = randomElement(blocks);
 
       state.liveBlock = newBlock;
       state.blockCounter = state.blockCounter + 1;
@@ -299,10 +300,10 @@ const gameBoardSlice = createSlice({
       if (state.blockCounter % 5 === 0) {
         if (state.liveBackground === 'one') {
           state.liveBackground = 'two';
-          state.backgroundTwo = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+          state.backgroundTwo = randomElement(backgrounds);
         } else {
           state.liveBackground = 'one';
-          state.backgroundOne = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+          state.backgroundOne = randomElement(backgrounds);
         }
       }
 
