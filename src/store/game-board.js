@@ -261,12 +261,12 @@ const clearCompletedRows = currentGrid => {
 const mergeNestedObjects = (existingObject, newObject) => {
   let returnObject = { ...existingObject };
 
-  Object.keys(newObject).forEach(outerKey =>
-    Object.keys(newObject[outerKey]).forEach(
-      innerKey =>
+  Object.keys(newObject).forEach(rowKey =>
+    Object.keys(newObject[rowKey]).forEach(
+      columnKey =>
         (returnObject = {
           ...returnObject,
-          [outerKey]: { ...returnObject[outerKey], [innerKey]: newObject[outerKey][innerKey] },
+          [rowKey]: { ...returnObject[rowKey], [columnKey]: newObject[rowKey][columnKey] },
         })
     )
   );
@@ -326,7 +326,6 @@ const gameBoardSlice = createSlice({
     updateGameBoard(state, action) {
       state.squares = action.payload;
     },
-
     updateClearedRows(state) {
       if (isCompletedRows(current(state.squares))) {
         state.clearedRows = state.clearedRows + numberOfCompletedRows(current(state.squares));

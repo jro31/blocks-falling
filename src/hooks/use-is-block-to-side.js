@@ -5,11 +5,11 @@ const useIsBlockToSide = () => {
   const isBlockToSide = direction => {
     let besideSquaresStatusArray = [];
 
-    Object.keys(squaresRef.current).forEach(outerKey =>
-      Object.keys(squaresRef.current[outerKey]).forEach(innerKey => {
-        if (squaresRef.current[outerKey][innerKey].status === live) {
+    Object.keys(squaresRef.current).forEach(rowKey =>
+      Object.keys(squaresRef.current[rowKey]).forEach(columnKey => {
+        if (squaresRef.current[rowKey][columnKey].status === live) {
           besideSquaresStatusArray.push(
-            squaresRef.current[outerKey][parseInt(innerKey) + (direction === left ? -1 : 1)].status
+            squaresRef.current[rowKey][parseInt(columnKey) + (direction === left ? -1 : 1)].status
           );
         }
       })
