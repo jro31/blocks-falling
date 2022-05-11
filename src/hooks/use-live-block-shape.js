@@ -5,13 +5,13 @@ const useLiveBlockShape = () => {
   const liveBlockShape = () => {
     let returnObject = {};
 
-    Object.keys(squaresRef.current).forEach(outerKey =>
-      Object.keys(squaresRef.current[outerKey]).forEach(innerKey => {
-        if (squaresRef.current[outerKey][innerKey].status === live) {
-          if (!returnObject[outerKey]) returnObject[outerKey] = {};
-          if (!returnObject[outerKey][innerKey]) returnObject[outerKey][innerKey] = {};
-          returnObject[outerKey][innerKey].status = live;
-          returnObject[outerKey][innerKey].block = squaresRef.current[outerKey][innerKey].block;
+    Object.keys(squaresRef.current).forEach(rowKey =>
+      Object.keys(squaresRef.current[rowKey]).forEach(columnKey => {
+        if (squaresRef.current[rowKey][columnKey].status === live) {
+          if (!returnObject[rowKey]) returnObject[rowKey] = {};
+          if (!returnObject[rowKey][columnKey]) returnObject[rowKey][columnKey] = {};
+          returnObject[rowKey][columnKey].status = live;
+          returnObject[rowKey][columnKey].block = squaresRef.current[rowKey][columnKey].block;
         }
       })
     );

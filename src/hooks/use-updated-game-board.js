@@ -6,13 +6,13 @@ const useUpdatedGameBoard = () => {
     let existingObject = JSON.parse(JSON.stringify(squaresRef.current));
     let newObject = JSON.parse(JSON.stringify(existingObject));
 
-    Object.keys(existingObject).forEach(outerKey =>
-      Object.keys(existingObject[outerKey]).forEach(innerKey => {
-        if (existingObject[outerKey][innerKey].status === live) {
-          newObject[outerKey][innerKey] = { status: outerKey === '0' ? dead : empty, block: '' };
+    Object.keys(existingObject).forEach(rowKey =>
+      Object.keys(existingObject[rowKey]).forEach(columnKey => {
+        if (existingObject[rowKey][columnKey].status === live) {
+          newObject[rowKey][columnKey] = { status: rowKey === '0' ? dead : empty, block: '' };
         }
-        if (movedBlock[outerKey] && movedBlock[outerKey][innerKey]) {
-          newObject[outerKey][innerKey] = { ...movedBlock[outerKey][innerKey] };
+        if (movedBlock[rowKey] && movedBlock[rowKey][columnKey]) {
+          newObject[rowKey][columnKey] = { ...movedBlock[rowKey][columnKey] };
         }
       })
     );

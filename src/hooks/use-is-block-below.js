@@ -1,19 +1,19 @@
 import { squaresRef } from '../components/GameBoard';
-import { live } from '../store/game-board';
+import { live, settled } from '../store/game-board';
 
 const useIsBlockBelow = () => {
   const isBlockBelow = () => {
     let belowSquaresStatusArray = [];
 
-    Object.keys(squaresRef.current).forEach(outerKey =>
-      Object.keys(squaresRef.current[outerKey]).forEach(innerKey => {
-        if (squaresRef.current[outerKey][innerKey].status === live) {
-          belowSquaresStatusArray.push(squaresRef.current[parseInt(outerKey) + 1][innerKey].status);
+    Object.keys(squaresRef.current).forEach(rowKey =>
+      Object.keys(squaresRef.current[rowKey]).forEach(columnKey => {
+        if (squaresRef.current[rowKey][columnKey].status === live) {
+          belowSquaresStatusArray.push(squaresRef.current[parseInt(rowKey) + 1][columnKey].status);
         }
       })
     );
 
-    return belowSquaresStatusArray.includes('settled');
+    return belowSquaresStatusArray.includes(settled);
   };
 
   return isBlockBelow;

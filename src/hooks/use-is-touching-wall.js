@@ -8,8 +8,8 @@ const useIsTouchingWall = () => {
 
     let statusArray = [];
 
-    Object.keys(squaresRef.current).forEach(outerKey => {
-      statusArray.push(squaresRef.current[outerKey][direction === left ? 1 : 10].status);
+    Object.keys(squaresRef.current).forEach(rowKey => {
+      statusArray.push(squaresRef.current[rowKey][direction === left ? 1 : 10].status);
     });
 
     return statusArray.includes(live);
