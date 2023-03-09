@@ -1,4 +1,4 @@
-An indistinct game made with React, where falling blocks must be rotated and fit together, hosted at [blocksfalling.com](https://blocksfalling.com/).
+An indistinct game made with React, where falling blocks must be rotated and fit together, hosted at [blocks.jethrowilliams.com](https://blocks.jethrowilliams.com/).
 
 - React 17.0.2
 - Redux Toolkit
